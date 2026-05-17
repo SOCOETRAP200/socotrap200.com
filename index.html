@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Wallet</title>
+  <link rel="stylesheet" href="wallet.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Balance -->
+  <div class="balance-card">
+    <h2>Solde total</h2>
+    <h1 id="balance">0 BIF</h1>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button onclick="sendMoney()">📤 Envoyer</button>
+    <button onclick="receiveMoney()">📥 Recevoir</button>
+    <button onclick="buyAsset()">💳 Acheter</button>
+    <button onclick="sellAsset()">💱 Vendre</button>
+  </div>
+
+  <!-- Assets -->
+  <div class="assets">
+    <h3>Mes actifs</h3>
+    <ul id="assetList"></ul>
+  </div>
+
+</div>
+
+<script src="wallet.js"></script>
+</body>
+  </html>
