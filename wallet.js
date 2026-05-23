@@ -84,3 +84,23 @@ function addTransaction(type, amount) {
 
   transactionList.appendChild(li);
 }                   }
+function disconnectWallet() {
+
+  document.getElementById("walletAddress").textContent =
+    "Non connecté";
+
+  document.getElementById("walletBalance").textContent =
+    "0";
+}
+async function connectWalletConnect() {
+
+  const provider = new WalletConnectProvider.default({
+    rpc: {
+      1: "https://mainnet.infura.io/v3/"
+    }
+  });
+
+  await provider.enable();
+
+  alert("WalletConnect connecté");
+}
