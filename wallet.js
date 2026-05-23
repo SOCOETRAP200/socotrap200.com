@@ -59,3 +59,16 @@ function addTransaction(type, amount) {
 
   transactionList.appendChild(li);
 }
+const transactionList = document.getElementById("transactionList");
+
+function addTransaction(type, amount) {
+
+  transactionList.innerHTML = "";
+
+  const li = document.createElement("li");
+
+  li.textContent =
+    `${type} : ${amount} ETH - ${new Date().toLocaleTimeString()}`;
+
+  transactionList.appendChild(li);
+                        }
