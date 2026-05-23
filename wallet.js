@@ -30,3 +30,19 @@ console.error(error);
 alert("Connexion annulée ou erreur.");
 }
 }
+const marketStatus = document.getElementById("marketStatus");
+
+function updateMarket() {
+
+  const random = Math.random();
+
+  if (random > 0.5) {
+    marketStatus.textContent = "▲ Haussier";
+    marketStatus.className = "bullish";
+  } else {
+    marketStatus.textContent = "▼ Baissier";
+    marketStatus.className = "bearish";
+  }
+}
+
+updateMarket();
