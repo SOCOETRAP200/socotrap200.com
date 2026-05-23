@@ -104,3 +104,32 @@ async function connectWalletConnect() {
 
   alert("WalletConnect connecté");
 }
+const marketStatus =
+  document.getElementById("marketStatus");
+
+function updateMarket() {
+
+  const variation =
+    (Math.random() * 10 - 5).toFixed(2);
+
+  if (variation >= 0) {
+
+    marketStatus.innerHTML =
+      `▲ +${variation}%`;
+
+    marketStatus.className =
+      "market bullish";
+
+  } else {
+
+    marketStatus.innerHTML =
+      `▼ ${variation}%`;
+
+    marketStatus.className =
+      "market bearish";
+  }
+}
+
+updateMarket();
+
+setInterval(updateMarket, 3000);
