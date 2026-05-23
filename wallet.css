@@ -121,3 +121,24 @@ body {
   margin-top: 10px;
   border-radius: 10px;
 }
+.market-box {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.market {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.bullish {
+  color: #22c55e;
+}
+
+.bearish {
+  color: #ef4444;
+}
