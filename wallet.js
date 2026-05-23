@@ -10,7 +10,7 @@ if (!window.ethereum) {
 alert("Aucun wallet compatible détecté. Installez MetaMask ou Trust Wallet.");
 return;
 }
-
+addTransaction("Connexion", "0");
 try {
 const accounts = await window.ethereum.request({
 method: "eth_requestAccounts"
