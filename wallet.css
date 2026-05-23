@@ -142,3 +142,32 @@ body {
 .bearish {
   color: #ef4444;
 }
+.wallet-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.action-btn {
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+
+  border: none;
+  color: white;
+  padding: 18px;
+  border-radius: 18px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.action-btn:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
