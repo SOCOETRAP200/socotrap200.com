@@ -8,7 +8,7 @@
 <body> <body>
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 <script src="wallet.js"></script>
-
+<script src="https://unpkg.com/@walletconnect/web3-provider/dist/umd/index.min.js"></script>
 <h1>Mon Wallet</h1>
 
 <button id="connectWallet">Connecter un wallet</button>
@@ -107,3 +107,52 @@ addTransaction("Connexion", "0");
 <ul id="transactionList">
   <li>Aucune transaction</li>
 </ul>
+.crypto-card {
+  background: #1e293b;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 12px;
+}
+<div class="crypto-card">
+  <h3>🟠 Bitcoin</h3>
+  <p>Prix : $104000</p>
+  <p>Variation : <span class="bullish">+2.5%</span></p>
+</div>
+
+<div class="crypto-card">
+  <h3>🔵 Ethereum</h3>
+  <p>Prix : $4200</p>
+  <p>Variation : <span class="bearish">-1.2%</span></p>
+</div>
+
+<div class="crypto-card">
+  <h3>🟡 BNB</h3>
+  <p>Prix : $650</p>
+  <p>Variation : <span class="bullish">+0.8%</span></p>
+</div>
+<h2>Graphique du marché</h2>
+
+<div class="chart">
+  📈 ETH/USD : tendance haussière
+</div>
+<h2>Cryptos supportées</h2>
+
+<p>🟠 BTC</p>
+<p>🔵 ETH</p>
+<p>🟡 BNB</p>
+<p>🟣 Polygon</p>
+<h2>Dernières transactions</h2>
+
+<div class="transaction">
+  <p>✅ Reçu +0.25 ETH</p>
+</div>
+
+<div class="transaction">
+  <p>📤 Envoyé -0.10 ETH</p>
+</div>
+<button onclick="disconnectWallet()">
+  Déconnecter
+</button>
+<button onclick="connectWalletConnect()">
+  Connecter Trust Wallet
+</button>
