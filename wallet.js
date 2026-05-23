@@ -1,55 +1,32 @@
-let balance = 100000; // balance initiale en BIF
+Je mets ça entre wallet et quoi
+const connectButton = document.getElementById("connectWallet");
+const walletAddress = document.getElementById("walletAddress");
+const walletBalance = document.getElementById("walletBalance");
 
-let assets = [
-  { name: "Bitcoin", symbol: "BTC", amount: 0.002 },
-  { name: "Ethereum", symbol: "ETH", amount: 0.05 },
-  { name: "Dollar", symbol: "USD", amount: 50 }
-];
+connectButton.addEventListener("click", connectWallet);
 
-function updateUI() {
-  document.getElementById("balance").innerText = balance + " BIF";
-
-  const list = document.getElementById("assetList");
-  list.innerHTML = "";
-
-  assets.forEach(asset => {
-    let li = document.createElement("li");
-    li.innerText = `${asset.name} (${asset.symbol}) : ${asset.amount}`;
-    list.appendChild(li);
-  });
+async function connectWallet() {
+if (!window.ethereum) {
+alert("Aucun wallet compatible détecté. Installez MetaMask ou Trust Wallet.");
+return;
 }
 
-function sendMoney() {
-  let amount = prompt("Entrer le montant à envoyer :");
-  if (amount && amount > 0) {
-    balance -= amount;
-    updateUI();
-  }
+try {
+const accounts = await window.ethereum.request({
+method: "eth_requestAccounts"
+});
+
+const account = accounts[0];  
+walletAddress.textContent = account;  
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);  
+const balance = await provider.getBalance(account);  
+
+walletBalance.textContent =  
+  parseFloat(ethers.utils.formatEther(balance)).toFixed(4) + " ETH";
+
+} catch (error) {
+console.error(error);
+alert("Connexion annulée ou erreur.");
 }
-
-function receiveMoney() {
-  let amount = prompt("Montant reçu :");
-  if (amount && amount > 0) {
-    balance += Number(amount);
-    updateUI();
-  }
 }
-
-function buyAsset() {
-  let name = prompt("Nom de l'actif :");
-  let amount = prompt("Quantité :");
-
-  if (name && amount) {
-    assets.push({ name: name, symbol: name.toUpperCase(), amount: Number(amount) });
-    updateUI();
-  }
-}
-
-function sellAsset() {
-  let name = prompt("Nom de l'actif à vendre :");
-
-  assets = assets.filter(asset => asset.name !== name);
-  updateUI();
-}
-
-updateUI();
