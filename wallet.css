@@ -59,3 +59,21 @@ body {
   padding: 10px;
   border-radius: 10px;
 }
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
