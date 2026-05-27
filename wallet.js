@@ -677,3 +677,55 @@ function updateTestTokens() {
 updateTestTokens();
 
 setInterval(updateTestTokens, 5000);
+const importTokenBtn =
+  document.getElementById("importTokenBtn");
+
+const customTokens =
+  document.getElementById("customTokens");
+
+importTokenBtn.onclick = () => {
+
+  const address =
+    document.getElementById("tokenAddress").value;
+
+  const symbol =
+    document.getElementById("tokenSymbol").value;
+
+  const balance =
+    document.getElementById("tokenBalance").value;
+
+  if (
+    address === "" ||
+    symbol === "" ||
+    balance === ""
+  ) {
+
+    alert("Remplis tous les champs");
+
+    return;
+
+  }
+
+  customTokens.innerHTML += `
+
+    <div class="tokenCard">
+
+      <h3>${symbol}</h3>
+
+      <p>${balance}</p>
+
+      <small>
+        ${address}
+      </small>
+
+    </div>
+
+  `;
+
+  document.getElementById("tokenAddress").value = "";
+
+  document.getElementById("tokenSymbol").value = "";
+
+  document.getElementById("tokenBalance").value = "";
+
+};
