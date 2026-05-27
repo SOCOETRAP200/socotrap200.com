@@ -153,3 +153,32 @@ affichage du solde
   }
 
 }
+async function loadBalance(address) {
+
+  const apiKey = "TA_CLE_API";
+
+  const url =
+    `https://api.etherscan.io/v2/api
+    ?chainid=1
+    &module=account
+    &action=balance
+    &address=${address}
+    &tag=latest
+    &apikey=${apiKey}`;
+
+  const response =
+    await fetch(url.replace(/\s/g, ""));
+
+  const data =
+    await response.json();
+
+  console.log(data);
+
+  const balanceETH =
+    data.result / 1000000000000000000;
+
+  document.getElementById("ethBalance")
+    .innerHTML =
+    `Balance : ${balanceETH.toFixed(4)} ETH`;
+
+}
