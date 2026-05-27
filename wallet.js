@@ -182,3 +182,15 @@ async function loadBalance(address) {
     `Balance : ${balanceETH.toFixed(4)} ETH`;
 
 }
+connectButton.onclick = async () => {
+
+  const accounts =
+    await ethereum.request({
+      method: "eth_requestAccounts",
+    });
+
+  const address = accounts[0];
+
+  loadBalance(address);
+
+};
