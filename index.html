@@ -2,390 +2,229 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mon Wallet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOCO Wallet</title>
   <link rel="stylesheet" href="wallet.css">
-</head> 
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div>
+        <h2>SOCO Wallet</h2>
+        <p>Mon portefeuille</p>
+      </div>
+
+      <div class="profile">
+        <img src="https://i.imgur.com/2DhmtJ4.png" alt="profile">
+      </div>
+    </div>
+
+
+    <!-- CARD -->
+    <div class="wallet-card">
+
+      <div class="balance-title">
+        Solde Total
+      </div>
+
+      <h1 id="balance">$24,580.90</h1>
+
+      <div class="market">
+        <span id="marketStatus">▲ +2.45%</span>
+      </div>
+
+
+      <!-- ACTIONS -->
+      <div class="actions">
+
+        <div class="action-btn">
+          <div class="circle blue">
+            ↑
+          </div>
+          <p>Envoyer</p>
+        </div>
+
+        <div class="action-btn">
+          <div class="circle green">
+            ↓
+          </div>
+          <p>Recevoir</p>
+        </div>
+
+        <div class="action-btn">
+          <div class="circle orange">
+            💳
+          </div>
+          <p>Acheter</p>
+        </div>
+
+        <div class="action-btn">
+          <div class="circle red">
+            ⇄
+          </div>
+          <p>Vendre</p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TOKENS -->
+    <div class="section-title">
+      Mes Cryptos
+    </div>
+
+
+    <div class="token-list">
+
+      <div class="token">
+        <div class="token-left">
+          <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" alt="btc">
+
+          <div>
+            <h3>Bitcoin</h3>
+            <span>BTC</span>
+          </div>
+        </div>
+
+        <div class="token-right">
+          <h3>$15,430</h3>
+          <span class="positive">+4.5%</span>
+        </div>
+      </div>
+
+
+      <div class="token">
+        <div class="token-left">
+          <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=029" alt="eth">
+
+          <div>
+            <h3>Ethereum</h3>
+            <span>ETH</span>
+          </div>
+        </div>
+
+        <div class="token-right">
+          <h3>$5,800</h3>
+          <span class="negative">-1.2%</span>
+        </div>
+      </div>
+
+
+      <div class="token">
+        <div class="token-left">
+          <img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=029" alt="usdt">
+
+          <div>
+            <h3>Tether</h3>
+            <span>USDT</span>
+          </div>
+        </div>
+
+        <div class="token-right">
+          <h3>$2,500</h3>
+          <span class="positive">+0.3%</span>
+        </div>
+      </div>
+
+
+      <div class="token">
+        <div class="token-left">
+          <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=029" alt="bnb">
+
+          <div>
+            <h3>BNB</h3>
+            <span>BNB</span>
+          </div>
+        </div>
+
+        <div class="token-right">
+          <h3>$840</h3>
+          <span class="positive">+3.7%</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- TRANSACTIONS -->
+    <div class="section-title">
+      Transactions Récentes
+    </div>
+
+
+    <div class="transactions">
+
+      <div class="transaction">
+        <div>
+          <h4>Bitcoin reçu</h4>
+          <span>Aujourd'hui</span>
+        </div>
+
+        <div class="amount positive">
+          +0.004 BTC
+        </div>
+      </div>
+
+
+      <div class="transaction">
+        <div>
+          <h4>Ethereum envoyé</h4>
+          <span>Hier</span>
+        </div>
+
+        <div class="amount negative">
+          -0.25 ETH
+        </div>
+      </div>
+
+
+      <div class="transaction">
+        <div>
+          <h4>USDT acheté</h4>
+          <span>2 jours</span>
+        </div>
+
+        <div class="amount positive">
+          +250 USDT
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+
+      <div class="nav-item active">
+        <span>🏠</span>
+        <p>Accueil</p>
+      </div>
+
+      <div class="nav-item">
+        <span>📈</span>
+        <p>Marché</p>
+      </div>
+
+      <div class="nav-item">
+        <span>🔄</span>
+        <p>Swap</p>
+      </div>
+
+      <div class="nav-item">
+        <span>⚙️</span>
+        <p>Paramètres</p>
+      </div>
+
+    </div>
+
+  </div>
+
   <script src="wallet.js"></script>
-<body> <body>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-<script src="wallet.js"></script>
-<script src="https://unpkg.com/@walletconnect/web3-provider/dist/umd/index.min.js"></script>
-<h1>Mon Wallet</h1>
-
-<button id="connectWallet">Connecter un wallet</button>
-
-<p>Adresse : <span id="walletAddress">Non connecté</span></p>
-<p>Solde ETH : <span id="walletBalance">0</span></p>
-
-<script src="wallet.js"></script>
-
 </body>
-  <button id="connectWallet">Connecter un wallet</button>
-
-<p>Adresse : <span id="walletAddress">Non connecté</span></p>
-<p>Solde ETH : <span id="walletBalance">0</span></p>
-  <h2>Solde total</h2>
-<h1 id="totalBalance">0 BIF</h1>
-
-<!-- AJOUTE ICI -->
-<div class="actions">
-
-  <button id="sendBtn">
-    Envoyer
-  </button>
-
-  <button id="receiveBtn">
-    Recevoir
-  </button>
-
-  <button id="buyBtn">
-    Acheter
-  </button>
-
-  <button id="sellBtn">
-    Vendre
-  </button>
-
-</div>
-
-<div id="actionBox"></div>
-<div class="wallet-actions">
-
-  <button class="action-btn">
-    📤 Envoyer
-  </button>
-
-  <button class="action-btn">
-    📥 Recevoir
-  </button>
-
-  <button class="action-btn">
-    💳 Acheter
-  </button>
-
-  <button class="action-btn">
-    💱 Vendre
-  </button>
-
-</div>
-
-<div class="container">
-
-  <!-- Balance -->
-  <div class="balance-card">
-    <h2>Solde total</h2>
-    <h1 id="balance">0 BIF</h1>
-  </div>
-
-  <!-- Actions -->
-  <div class="actions">
-    <button onclick="sendMoney()">📤 Envoyer</button>
-    <button onclick="receiveMoney()">📥 Recevoir</button>
-    <button onclick="buyAsset()">💳 Acheter</button>
-    <button onclick="sellAsset()">💱 Vendre</button>
-  </div>
-
-  <!-- Assets -->
-  <div class="assets">
-    <h3>Mes actifs</h3>
-    <ul id="assetList"></ul>
-  </div>
-
-</div>
-
-<script src="wallet.js"></script>
-</body>
-  </html>
-<p>Solde ETH : <span id="walletBalance">0</span></p>
-<p>
-  Marché :
-  <span id="marketStatus" class="bullish">▲ Haussier</span>
-</p>
-<button id="connectWallet">Connecter un wallet</button>
-
-<p>Adresse : <span id="walletAddress">Non connecté</span></p>
-<p>Solde ETH : <span id="walletBalance">0</span></p>
-addTransaction("Connexion", "0");
-<p>
-  Marché :
-  <span id="marketStatus" class="bullish">▲ Haussier</span>
-</p>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.min.js"></script>
-<script src="wallet.js"></script>
-<p>BTC : $104000</p>
-<p>ETH : $4200</p>
-<h3>Choisir un réseau</h3>
-
-<button onclick="switchNetwork('0x1')">
-  Ethereum
-</button>
-
-<button onclick="switchNetwork('0x38')">
-  BNB Chain
-</button>
-
-<button onclick="switchNetwork('0x89')">
-  Polygon
-</button>
-<button id="connectWallet">Connecter un wallet</button>
-
-<h3>Choisir un réseau</h3>
-
-<button onclick="switchNetwork('0x1')">Ethereum</button>
-
-<button onclick="switchNetwork('0x38')">BNB Chain</button>
-
-<button onclick="switchNetwork('0x89')">Polygon</button>
-
-<p>Adresse : <span id="walletAddress">Non connecté</span></p>
-<p>Solde ETH : <span id="walletBalance">0</span></p>
-<input placeholder="Adresse du destinataire">
-<input placeholder="Montant ETH">
-<button>Envoyer</button>
-<p>Adresse : <span id="walletAddress">Non connecté</span></p>
-<p>Solde ETH : <span id="walletBalance">0</span></p>
-
-<h3>Historique des transactions</h3>
-
-<ul id="transactionList">
-  <li>Aucune transaction</li>
-</ul>
-.crypto-card {
-  background: #1e293b;
-  padding: 15px;
-  margin-top: 15px;
-  border-radius: 12px;
-}
-<div class="crypto-card">
-  <h3>🟠 Bitcoin</h3>
-  <p>Prix : $104000</p>
-  <p>Variation : <span class="bullish">+2.5%</span></p>
-</div>
-
-<div class="crypto-card">
-  <h3>🔵 Ethereum</h3>
-  <p>Prix : $4200</p>
-  <p>Variation : <span class="bearish">-1.2%</span></p>
-</div>
-
-<div class="crypto-card">
-  <h3>🟡 BNB</h3>
-  <p>Prix : $650</p>
-  <p>Variation : <span class="bullish">+0.8%</span></p>
-</div>
-<h2>Graphique du marché</h2>
-
-<div class="chart">
-  📈 ETH/USD : tendance haussière
-</div>
-<h2>Cryptos supportées</h2>
-
-<p>🟠 BTC</p>
-<p>🔵 ETH</p>
-<p>🟡 BNB</p>
-<p>🟣 Polygon</p>
-<h2>Dernières transactions</h2>
-
-<div class="transaction">
-  <p>✅ Reçu +0.25 ETH</p>
-</div>
-
-<div class="transaction">
-  <p>📤 Envoyé -0.10 ETH</p>
-</div>
-<button onclick="disconnectWallet()">
-  Déconnecter
-</button>
-<button onclick="connectWalletConnect()">
-  Connecter Trust Wallet
-</button>
-
-<div class="market-box">
-
-  <h3>Variation du marché</h3>
-
-  <div id="marketStatus" class="market bullish">
-    ▲ +2.45%
-  </div>
-
-</div>
-<div class="wallet-actions">
-
-  <button class="action-btn">
-    📤 Envoyer
-  </button>
-
-  <button class="action-btn">
-    📥 Recevoir
-  </button>
-
-  <button class="action-btn">
-    💳 Acheter
-  </button>
-
-  <button class="action-btn">
-    💱 Vendre
-  </button>
-
-</div>
-<div class="asset">
-  <h3>Bitcoin</h3>
-  <p id="btcPrice">Chargement...</p>
-</div>
-
-<div class="asset">
-  <h3>Ethereum</h3>
-  <p id="ethPrice">Chargement...</p>
-</div>
-<script src="wallet.js"></script>
-<button id="connectWallet">
-  Connect Wallet
-</button>
-
-<p id="walletAddress"></p>
-<button id="connectWallet">
-  Connect Wallet
-</button>
-
-<p id="walletAddress"></p>
-
-<p id="ethBalance">
-  Balance : 0 ETH
-</p>
-<p id="btcPrice"></p>
-<p id="ethPrice"></p>
-<div class="actions">
-
-  <button id="sendBtn">
-    Envoyer
-  </button>
-
-  <button id="receiveBtn">
-    Recevoir
-  </button>
-
-  <button id="buyBtn">
-    Acheter
-  </button>
-
-  <button id="sellBtn">
-    Vendre
-  </button>
-
-</div>
-
-<div id="actionBox"></div>
-<h2>Transactions</h2>
-
-<div id="txHistory"></div>
-<body>
-
-  contenu wallet
-
-  boutons
-
-  actionBox
-
-  historique transactions
-
-  script wallet.js
-
-</body>
-<body>
-
-  contenu wallet
-
-  boutons
-
-  actionBox
-
-  historique transactions
-
-  script wallet.js
-
-</body>
-
-<div class="market">
-
-  <div class="coinCard">
-
-    <h3>Bitcoin</h3>
-
-    <p id="btcPrice">
-      Chargement...
-    </p>
-
-  </div>
-
-  <div class="coinCard">
-
-    <h3>Ethereum</h3>
-
-    <p id="ethPrice">
-      Chargement...
-    </p>
-
-  </div>
-
-</div>
-<h2>Jetons de test</h2>
-
-<div class="tokenCard">
-
-  <h3>Test USDT</h3>
-
-  <p id="testUsdt">
-    1000 USDT
-  </p>
-
-</div>
-
-<div class="tokenCard">
-
-  <h3>Test ETH</h3>
-
-  <p id="testEth">
-    5 ETH
-  </p>
-
-</div>
-
-<div class="tokenCard">
-
-  <h3>Test BNB</h3>
-
-  <p id="testBnb">
-    20 BNB
-  </p>
-
-</div>
-<h2>Importer un token</h2>
-
-<div class="importToken">
-
-  <input
-    type="text"
-    id="tokenAddress"
-    placeholder="Adresse du contrat"
-  >
-
-  <input
-    type="text"
-    id="tokenSymbol"
-    placeholder="Symbole"
-  >
-
-  <input
-    type="number"
-    id="tokenBalance"
-    placeholder="Balance"
-  >
-
-  <button id="importTokenBtn">
-    Importer
-  </button>
-
-</div>
-
-<div id="customTokens"></div>
+</html>
