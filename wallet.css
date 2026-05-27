@@ -220,7 +220,17 @@ body {
   border-radius: 10px;
 
   border: none;
+.tokenCard {
 
+  background: #1c1c1c;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  margin-top: 10px;
+
+}
 }
 .txCard {
 
