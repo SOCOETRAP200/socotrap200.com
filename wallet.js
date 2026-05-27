@@ -545,3 +545,70 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
 });
+async function loadTransactions(address) {
+
+  const apiKey = "TA_CLE_API";
+
+  const url =
+    `https://api.etherscan.io/v2/api
+    ?chainid=1
+    &module=account
+    &action=txlist
+    &address=${address}
+    &startblock=0
+    &endblock=99999999
+    &page=1
+    &offset=5
+    &sort=desc
+    &apikey=${apiKey}`;
+
+  try {
+
+    const response =
+      await fetch(url.replace(/\s/g, ""));
+
+    const data =
+      await response.json();
+
+    const txHistory =
+      document.getElementById("txHistory");
+
+    txHistory.innerHTML = "";
+
+    data.result.forEach((tx) => {
+
+      const valueETH =
+        tx.value / 1000000000000000000;
+
+      txHistory.innerHTML += `
+
+        <div class="txCard">
+
+          <p>
+            From :
+            ${tx.from.substring(0, 8)}...
+          </p>
+
+          <p>
+            To :
+            ${tx.to.substring(0, 8)}...
+          </p>
+
+          <p>
+            Amount :
+            ${valueETH.toFixed(4)} ETH
+          </p>
+
+        </div>
+
+      `;
+
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
