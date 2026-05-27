@@ -649,3 +649,31 @@ async function loadMarketPrices() {
 loadMarketPrices();
 
 setInterval(loadMarketPrices, 30000);
+function updateTestTokens() {
+
+  let usdt =
+    (1000 + Math.random() * 20).toFixed(2);
+
+  let eth =
+    (5 + Math.random()).toFixed(4);
+
+  let bnb =
+    (20 + Math.random() * 2).toFixed(3);
+
+  document.getElementById("testUsdt")
+    .innerHTML =
+    `${usdt} USDT`;
+
+  document.getElementById("testEth")
+    .innerHTML =
+    `${eth} ETH`;
+
+  document.getElementById("testBnb")
+    .innerHTML =
+    `${bnb} BNB`;
+
+}
+
+updateTestTokens();
+
+setInterval(updateTestTokens, 5000);
