@@ -403,3 +403,38 @@ sellBtn.onclick = () => {
   `;
 
 };
+async function loadCryptoPrices() {
+
+  try {
+
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum"
+    );
+
+    const data = await response.json();
+
+    const btc = data[0];
+
+    const eth = data[1];
+
+    document.getElementById("btcPrice")
+      .innerHTML =
+      `BTC : $${btc.current_price}
+       (${btc.price_change_percentage_24h.toFixed(2)}%)`;
+
+    document.getElementById("ethPrice")
+      .innerHTML =
+      `ETH : $${eth.current_price}
+       (${eth.price_change_percentage_24h.toFixed(2)}%)`;
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
+
+loadCryptoPrices();
+
+setInterval(loadCryptoPrices, 30000);
