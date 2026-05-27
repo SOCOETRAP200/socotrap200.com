@@ -194,3 +194,46 @@ connectButton.onclick = async () => {
   loadBalance(address);
 
 };
+async function loadCryptoPrices() {
+
+  try {
+
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true"
+    );
+
+    const data = await response.json();
+
+    const btcPrice =
+      data.bitcoin.usd;
+
+    const ethPrice =
+      data.ethereum.usd;
+
+    const btcChange =
+      data.bitcoin.usd_24h_change.toFixed(2);
+
+    const ethChange =
+      data.ethereum.usd_24h_change.toFixed(2);
+
+    document.getElementById("btcPrice")
+      .innerHTML =
+      `BTC : $${btcPrice}
+       (${btcChange}%)`;
+
+    document.getElementById("ethPrice")
+      .innerHTML =
+      `ETH : $${ethPrice}
+       (${ethChange}%)`;
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
+
+loadCryptoPrices();
+
+setInterval(loadCryptoPrices, 5000);
