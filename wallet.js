@@ -103,3 +103,41 @@ connectButton.onclick = async () => {
   }
 
 };
+async function loadBalance(address) {
+
+  const apiKey = "TA_CLE_API";
+
+  const url =
+    `https://api.etherscan.io/v2/api
+    ?chainid=1
+    &module=account
+    &action=balance
+    &address=${address}
+    &tag=latest
+    &apikey=${apiKey}`;
+
+  try {
+
+    const response =
+      await fetch(url.replace(/\s/g, ""));
+
+    const data =
+      await response.json();
+
+    const balanceWei =
+      data.result;
+
+    const balanceETH =
+      balanceWei / 1000000000000000000;
+
+    document.getElementById("ethBalance")
+      .innerHTML =
+      `Balance : ${balanceETH.toFixed(4)} ETH`;
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
