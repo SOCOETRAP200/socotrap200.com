@@ -438,3 +438,110 @@ async function loadCryptoPrices() {
 loadCryptoPrices();
 
 setInterval(loadCryptoPrices, 30000);
+document.addEventListener("DOMContentLoaded", () => {
+
+  const sendBtn =
+    document.getElementById("sendBtn");
+
+  const receiveBtn =
+    document.getElementById("receiveBtn");
+
+  const buyBtn =
+    document.getElementById("buyBtn");
+
+  const sellBtn =
+    document.getElementById("sellBtn");
+
+  const actionBox =
+    document.getElementById("actionBox");
+
+  sendBtn.onclick = () => {
+
+    actionBox.innerHTML = `
+
+      <h3>Envoyer Crypto</h3>
+
+      <input
+        type="text"
+        placeholder="Adresse destinataire"
+      >
+
+      <input
+        type="number"
+        placeholder="Montant"
+      >
+
+      <button>
+        Confirmer
+      </button>
+
+    `;
+
+  };
+
+  receiveBtn.onclick = async () => {
+
+    if (!window.ethereum) {
+
+      alert("MetaMask non installé");
+
+      return;
+
+    }
+
+    const accounts =
+      await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+    actionBox.innerHTML = `
+
+      <h3>Recevoir Crypto</h3>
+
+      <p>
+        Adresse dépôt :
+      </p>
+
+      <p>${accounts[0]}</p>
+
+      <h4>Réseaux :</h4>
+
+      <ul>
+        <li>Ethereum</li>
+        <li>BNB Chain</li>
+        <li>Polygon</li>
+      </ul>
+
+    `;
+
+  };
+
+  buyBtn.onclick = () => {
+
+    actionBox.innerHTML = `
+
+      <h3>Acheter</h3>
+
+      <p>
+        Fonction bientôt disponible
+      </p>
+
+    `;
+
+  };
+
+  sellBtn.onclick = () => {
+
+    actionBox.innerHTML = `
+
+      <h3>Vendre</h3>
+
+      <p>
+        Fonction bientôt disponible
+      </p>
+
+    `;
+
+  };
+
+});
