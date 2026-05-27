@@ -612,3 +612,40 @@ async function loadTransactions(address) {
   }
 
 }
+async function loadMarketPrices() {
+
+  try {
+
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum"
+    );
+
+    const data = await response.json();
+
+    const bitcoin = data[0];
+
+    const ethereum = data[1];
+
+    document.getElementById("btcPrice")
+      .innerHTML =
+
+      `$${bitcoin.current_price}
+       (${bitcoin.price_change_percentage_24h.toFixed(2)}%)`;
+
+    document.getElementById("ethPrice")
+      .innerHTML =
+
+      `$${ethereum.current_price}
+       (${ethereum.price_change_percentage_24h.toFixed(2)}%)`;
+
+  } catch (error) {
+
+    console.log("Erreur API :", error);
+
+  }
+
+}
+
+loadMarketPrices();
+
+setInterval(loadMarketPrices, 30000);
