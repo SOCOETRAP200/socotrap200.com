@@ -260,56 +260,41 @@ body {
   margin-top: 10px;
 
 }
+.importToken {
 
-const importTokenBtn =
-  document.getElementById("importTokenBtn");
+  margin-top: 20px;
 
-const customTokens =
-  document.getElementById("customTokens");
+}
 
-importTokenBtn.onclick = () => {
+.importToken input {
 
-  const address =
-    document.getElementById("tokenAddress").value;
+  width: 100%;
 
-  const symbol =
-    document.getElementById("tokenSymbol").value;
+  padding: 10px;
 
-  const balance =
-    document.getElementById("tokenBalance").value;
+  margin-top: 10px;
 
-  if (
-    address === "" ||
-    symbol === "" ||
-    balance === ""
-  ) {
+  border: none;
 
-    alert("Remplis tous les champs");
+  border-radius: 10px;
 
-    return;
+}
 
-  }
+.importToken button {
 
-  customTokens.innerHTML += `
+  width: 100%;
 
-    <div class="tokenCard">
+  padding: 12px;
 
-      <h3>${symbol}</h3>
+  margin-top: 10px;
 
-      <p>${balance}</p>
+  background: #1e88ff;
 
-      <small>
-        ${address}
-      </small>
+  color: white;
 
-    </div>
+  border: none;
 
-  `;
+  border-radius: 10px;
 
-  document.getElementById("tokenAddress").value = "";
+}
 
-  document.getElementById("tokenSymbol").value = "";
-
-  document.getElementById("tokenBalance").value = "";
-
-};
