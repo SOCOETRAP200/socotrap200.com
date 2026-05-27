@@ -78,3 +78,28 @@ async function loadCryptoPrices() {
 loadCryptoPrices();
 
 setInterval(loadCryptoPrices, 30000);
+const connectButton =
+  document.getElementById("connectWallet");
+
+const walletAddress =
+  document.getElementById("walletAddress");
+
+connectButton.onclick = async () => {
+
+  if (window.ethereum) {
+
+    const accounts =
+      await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+    walletAddress.innerHTML =
+      `Connected : ${accounts[0]}`;
+
+  } else {
+
+    alert("MetaMask non installé");
+
+  }
+
+};
