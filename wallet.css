@@ -1,300 +1,209 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-.container {
-  padding: 20px;
-  max-width: 500px;
+body {
+  background: #0b1220;
+  color: white;
+}
+
+.app {
+  max-width: 430px;
   margin: auto;
-}
-
-.balance-card {
-  background: #1e293b;
+  min-height: 100vh;
   padding: 20px;
-  border-radius: 15px;
-  text-align: center;
+  padding-bottom: 120px;
 }
 
-.balance-card h1 {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header h2 {
+  font-size: 28px;
+}
+
+.header p {
+  color: #9ca3af;
+}
+
+.profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.wallet-card {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.balance-title {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+#walletBalance {
+  font-size: 38px;
+}
+
+#balance {
+  font-size: 40px;
   margin-top: 10px;
-  color: #38bdf8;
+}
+
+.market {
+  margin-top: 10px;
+}
+
+#marketStatus {
+  background: rgba(255,255,255,0.2);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 14px;
 }
 
 .actions {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.actions button {
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  background: #334155;
-  color: white;
-  cursor: pointer;
-}
-
-.actions button:hover {
-  background: #475569;
-}
-
-.assets {
+  display: flex;
+  justify-content: space-between;
   margin-top: 30px;
 }
 
-.assets ul {
-  list-style: none;
-  padding: 0;
-}
-
-.assets li {
-  background: #1e293b;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 10px;
-}
-body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
-
-button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-.bullish {
-  color: #16a34a;
-  font-weight: bold;
-}
-
-.bearish {
-  color: #dc2626;
-  font-weight: bold;
-}
-#transactionList {
-  list-style: none;
-  padding: 0;
-}
-
-#transactionList li {
-  background: #f3f4f6;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-}
-.crypto-card {
-  background: #1e293b;
-  padding: 15px;
-  margin-top: 15px;
-  border-radius: 12px;
-}
-.chart {
-  background: #0f172a;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 15px;
-  color: #22c55e;
-}
-body {
-  background: linear-gradient(to bottom, #020617, #0f172a);
-  color: white;
-  font-family: Arial, sans-serif;
-}
-.transaction {
-  background: #1e293b;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 10px;
-}
-.market-box {
-  background: #1e293b;
-  padding: 15px;
-  border-radius: 15px;
-  margin-top: 15px;
+.action-btn {
   text-align: center;
 }
 
-.market {
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 10px;
+.circle {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: auto;
+  margin-bottom: 8px;
 }
 
-.bullish {
+.blue {
+  background: #3b82f6;
+}
+
+.green {
+  background: #10b981;
+}
+
+.orange {
+  background: #f59e0b;
+}
+
+.red {
+  background: #ef4444;
+}
+
+.section-title {
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.token-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.token {
+  background: #111827;
+  padding: 18px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.token-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.token-left img {
+  width: 45px;
+  height: 45px;
+}
+
+.token-left span {
+  color: #9ca3af;
+}
+
+.token-right {
+  text-align: right;
+}
+
+.positive {
   color: #22c55e;
 }
 
-.bearish {
+.negative {
   color: #ef4444;
 }
-.wallet-actions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 20px;
+
+.transactions {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.action-btn {
-  background: linear-gradient(
-    135deg,
-    #2563eb,
-    #1d4ed8
-  );
-
-  border: none;
-  color: white;
+.transaction {
+  background: #111827;
   padding: 18px;
   border-radius: 18px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-
-.action-btn:hover {
-  transform: scale(1.03);
-  opacity: 0.9;
-}
-.actions {
-
   display: flex;
-
-  gap: 10px;
-
-  margin-top: 20px;
-
+  justify-content: space-between;
+  align-items: center;
 }
 
-.actions button {
-
-  background: #1e88ff;
-
-  color: white;
-
-  border: none;
-
-  padding: 10px 15px;
-
-  border-radius: 10px;
-
-  cursor: pointer;
-
+.transaction span {
+  color: #9ca3af;
+  font-size: 14px;
 }
 
-#actionBox {
-
-  margin-top: 20px;
-
-  background: #111;
-
-  padding: 20px;
-
-  border-radius: 15px;
-
-}
-
-#actionBox input {
-
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-
-  padding: 10px;
-
-  margin-top: 10px;
-
-  border-radius: 10px;
-
-  border: none;
-.tokenCard {
-
-  background: #1c1c1c;
-
-  padding: 15px;
-
-  border-radius: 15px;
-
-  margin-top: 10px;
-
-}
-}
-.txCard {
-
-  background: #1a1a1a;
-
-  padding: 15px;
-
-  margin-top: 10px;
-
-  border-radius: 15px;
-
-}
-.market {
-
-  margin-top: 20px;
-
+  background: #111827;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  border-top: 1px solid #1f2937;
 }
 
-.coinCard {
-
-  background: #1a1a1a;
-
-  padding: 15px;
-
-  border-radius: 15px;
-
-  margin-top: 10px;
-
-}
-.importToken {
-
-  margin-top: 20px;
-
+.nav-item {
+  text-align: center;
+  color: #9ca3af;
 }
 
-.importToken input {
-
-  width: 100%;
-
-  padding: 10px;
-
-  margin-top: 10px;
-
-  border: none;
-
-  border-radius: 10px;
-
+.nav-item span {
+  font-size: 22px;
 }
 
-.importToken button {
-
-  width: 100%;
-
-  padding: 12px;
-
-  margin-top: 10px;
-
-  background: #1e88ff;
-
-  color: white;
-
-  border: none;
-
-  border-radius: 10px;
-
+.nav-item p {
+  font-size: 12px;
+  margin-top: 5px;
 }
 
+.active {
+  color: #3b82f6;
+}
