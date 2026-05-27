@@ -1,4 +1,4 @@
-Je mets ça entre wallet et quoi
+seJe mets ça entre wallet et quoi
 const connectButton = document.getElementById("connectWallet");
 const walletAddress = document.getElementById("walletAddress");
 const walletBalance = document.getElementById("walletBalance");
@@ -237,3 +237,169 @@ async function loadCryptoPrices() {
 loadCryptoPrices();
 
 setInterval(loadCryptoPrices, 5000);
+const sendBtn =
+  document.getElementById("sendBtn");
+
+const receiveBtn =
+  document.getElementById("receiveBtn");
+
+const buyBtn =
+  document.getElementById("buyBtn");
+
+const sellBtn =
+  document.getElementById("sellBtn");
+
+const actionBox =
+  document.getElementById("actionBox");
+
+sendBtn.onclick = () => {
+
+  actionBox.innerHTML = `
+
+    <h3>Envoyer Crypto</h3>
+
+    <input
+      type="text"
+      id="receiver"
+      placeholder="Adresse du destinataire"
+    >
+
+    <input
+      type="number"
+      id="amount"
+      placeholder="Montant ETH"
+    >
+
+    <button id="confirmSend">
+      Confirmer
+    </button>
+
+  `;
+
+  document
+    .getElementById("confirmSend")
+    .onclick = async () => {
+
+      const receiver =
+        document.getElementById("receiver").value;
+
+      const amount =
+        document.getElementById("amount").value;
+
+      if (!window.ethereum) {
+
+        alert("MetaMask non installé");
+
+        return;
+
+      }
+
+      const accounts =
+        await ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+      const sender =
+        accounts[0];
+
+      const transaction = {
+
+        from: sender,
+
+        to: receiver,
+
+        value:
+          (
+            Number(amount) *
+            1000000000000000000
+          ).toString(16),
+
+      };
+
+      try {
+
+        await ethereum.request({
+
+          method: "eth_sendTransaction",
+
+          params: [transaction],
+
+        });
+
+        alert("Transaction envoyée");
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+    };
+
+};
+
+receiveBtn.onclick = async () => {
+
+  if (!window.ethereum) {
+
+    alert("MetaMask non installé");
+
+    return;
+
+  }
+
+  const accounts =
+    await ethereum.request({
+      method: "eth_requestAccounts",
+    });
+
+  const address =
+    accounts[0];
+
+  actionBox.innerHTML = `
+
+    <h3>Recevoir Crypto</h3>
+
+    <p>Adresse de dépôt :</p>
+
+    <p>${address}</p>
+
+    <h4>Réseaux supportés :</h4>
+
+    <ul>
+      <li>Ethereum</li>
+      <li>BNB Chain</li>
+      <li>Polygon</li>
+    </ul>
+
+  `;
+
+};
+
+buyBtn.onclick = () => {
+
+  actionBox.innerHTML = `
+
+    <h3>Acheter Crypto</h3>
+
+    <p>
+      Fonction d’achat bientôt disponible
+    </p>
+
+  `;
+
+};
+
+sellBtn.onclick = () => {
+
+  actionBox.innerHTML = `
+
+    <h3>Vendre Crypto</h3>
+
+    <p>
+      Fonction de vente bientôt disponible
+    </p>
+
+  `;
+
+};
