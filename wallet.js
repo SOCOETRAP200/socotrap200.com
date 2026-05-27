@@ -137,7 +137,19 @@ async function loadBalance(address) {
   } catch (error) {
 
     console.log(error);
+connexion metamask
 
+↓
+
+loadBalance(address)
+
+↓
+
+API etherscan
+
+↓
+
+affichage du solde
   }
 
 }
