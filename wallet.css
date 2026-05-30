@@ -18,6 +18,8 @@ padding:20px;
 padding-bottom:100px;
 }
 
+/* PAGES */
+
 .page{
 display:none;
 }
@@ -49,7 +51,11 @@ background:#3375ff;
 display:flex;
 align-items:center;
 justify-content:center;
+font-size:20px;
 font-weight:bold;
+}
+
+.wallet-user h2{
 font-size:20px;
 }
 
@@ -65,6 +71,7 @@ border:none;
 border-radius:50%;
 background:#161d2e;
 color:white;
+cursor:pointer;
 }
 
 /* BALANCE */
@@ -81,28 +88,55 @@ margin-bottom:20px;
 }
 
 .balance-label{
-opacity:.8;
+font-size:14px;
+opacity:.9;
 margin-bottom:10px;
 }
 
 #balance{
 font-size:38px;
+font-weight:bold;
 margin-bottom:10px;
 }
 
 .market-indicator{
 display:inline-block;
-background:rgba(255,255,255,.2);
 padding:8px 14px;
 border-radius:20px;
+background:rgba(255,255,255,.2);
+}
+
+/* CONNECT */
+
+.wallet-connect-card{
+background:#161d2e;
+padding:18px;
+border-radius:18px;
+margin-bottom:20px;
+}
+
+.connect-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#3375ff;
+color:white;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:15px;
+}
+
+.wallet-info{
+font-size:13px;
+word-break:break-all;
 }
 
 /* ACTIONS */
 
 .quick-actions{
 display:grid;
-grid-template-columns:
-repeat(4,1fr);
+grid-template-columns:repeat(4,1fr);
 gap:10px;
 margin-bottom:20px;
 }
@@ -110,9 +144,11 @@ margin-bottom:20px;
 .action-item{
 background:#161d2e;
 border:none;
-color:white;
 border-radius:18px;
 padding:15px;
+color:white;
+cursor:pointer;
+
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -121,27 +157,6 @@ gap:8px;
 
 .action-item span{
 font-size:12px;
-}
-
-/* TABS */
-
-.tabs{
-display:flex;
-gap:10px;
-margin-bottom:15px;
-}
-
-.tab{
-flex:1;
-padding:12px;
-border:none;
-border-radius:12px;
-background:#161d2e;
-color:white;
-}
-
-.tab.active{
-background:#3375ff;
 }
 
 /* TOKENS */
@@ -154,8 +169,9 @@ gap:12px;
 
 .token-card{
 background:#161d2e;
-padding:15px;
+padding:16px;
 border-radius:18px;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -179,13 +195,16 @@ color:#9ca3af;
 /* LOGOS */
 
 .coin-logo{
-width:42px;
-height:42px;
+width:44px;
+height:44px;
 border-radius:50%;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 font-weight:bold;
+font-size:18px;
 }
 
 .btc{
@@ -222,10 +241,6 @@ margin-top:15px;
 
 /* SWAP */
 
-#swapPage{
-padding-top:10px;
-}
-
 #swapPage h2{
 margin-bottom:15px;
 }
@@ -234,11 +249,11 @@ margin-bottom:15px;
 #swapPage input{
 width:100%;
 padding:14px;
-margin-bottom:12px;
 border:none;
 border-radius:12px;
 background:#161d2e;
 color:white;
+margin-bottom:12px;
 }
 
 #swapResult{
@@ -256,33 +271,63 @@ border-radius:12px;
 background:#3375ff;
 color:white;
 font-weight:bold;
+cursor:pointer;
 }
 
-/* NAVIGATION */
+/* BOTTOM NAV */
 
 .bottom-nav{
 position:fixed;
 bottom:0;
 left:0;
 width:100%;
+
 background:#111827;
-border-top:1px solid #1f2937;
+
+border-top:
+1px solid #1f2937;
+
 display:flex;
 justify-content:space-around;
+
 padding:12px 0;
+
+z-index:999;
 }
 
 .nav-btn{
 background:none;
 border:none;
 color:#9ca3af;
+
 display:flex;
 flex-direction:column;
 align-items:center;
+
 gap:4px;
-font-size:12px;
+
+cursor:pointer;
 }
 
 .nav-btn.active{
 color:#3375ff;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:480px){
+
+#balance{
+font-size:32px;
+}
+
+.quick-actions{
+grid-template-columns:
+repeat(4,1fr);
+}
+
+.action-item{
+padding:12px;
+}
+
 }
