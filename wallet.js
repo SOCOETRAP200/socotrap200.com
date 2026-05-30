@@ -1,6 +1,6 @@
-// ===============================
-// NAVIGATION ENTRE LES PAGES
-// ===============================
+// ==========================
+// NAVIGATION
+// ==========================
 
 function showPage(pageId) {
 
@@ -16,58 +16,24 @@ function showPage(pageId) {
     .getElementById(pageId)
     .classList.add("active");
 
-    document
-    .querySelectorAll(".nav-btn")
-    .forEach(btn => {
-
-        btn.classList.remove("active");
-
-    });
-
 }
 
-// ===============================
-// MODALES
-// ===============================
-
-function openModal(id){
-
-    const modal =
-    document.getElementById(id);
-
-    if(modal){
-
-        modal.style.display = "flex";
-
-    }
-
-}
-
-function closeModal(id){
-
-    const modal =
-    document.getElementById(id);
-
-    if(modal){
-
-        modal.style.display = "none";
-
-    }
-
-}
-
-// ===============================
-// PRIX CRYPTO EN TEMPS RÉEL
-// ===============================
+// ==========================
+// VARIABLES MARCHÉ
+// ==========================
 
 let btcPrice = 0;
 let ethPrice = 0;
 let bnbPrice = 0;
 let usdtPrice = 1;
 
-async function updateMarket(){
+// ==========================
+// PRIX TEMPS RÉEL
+// ==========================
 
-    try{
+async function updateMarket() {
+
+    try {
 
         const response =
         await fetch(
@@ -127,24 +93,19 @@ async function updateMarket(){
         .usd_24h_change
         .toFixed(2) + "%";
 
-        const marketStatus =
         document.getElementById(
-        "marketStatus");
+        "marketStatus"
+        ).innerHTML =
 
-        marketStatus.innerHTML =
         "BTC $" +
+
         btcPrice.toLocaleString();
 
     }
 
-    catch(error){
+    catch(error) {
 
         console.log(error);
-
-        document.getElementById(
-        "marketStatus"
-        ).innerHTML =
-        "Marché indisponible";
 
     }
 
@@ -157,11 +118,74 @@ updateMarket,
 30000
 );
 
-// ===============================
-// CALCULATEUR DE SWAP
-// ===============================
+// ==========================
+// CONNEXION METAMASK
+// ==========================
 
-function calculateSwap(){
+async function connectWallet() {
+
+    if (!window.ethereum) {
+
+        alert(
+        "MetaMask n'est pas installé."
+        );
+
+        return;
+
+    }
+
+    try {
+
+        await window.ethereum.request({
+            method: "eth_requestAccounts"
+        });
+
+        const provider =
+        new ethers.BrowserProvider(
+        window.ethereum
+        );
+
+        const signer =
+        await provider.getSigner();
+
+        const address =
+        await signer.getAddress();
+
+        const balance =
+        await provider.getBalance(
+        address
+        );
+
+        document.getElementById(
+        "walletAddress"
+        ).innerHTML =
+        address;
+
+        document.getElementById(
+        "walletBalance"
+        ).innerHTML =
+
+        parseFloat(
+        ethers.formatEther(balance)
+        ).toFixed(4)
+
+        + " ETH";
+
+    }
+
+    catch(error) {
+
+        console.log(error);
+
+    }
+
+}
+
+// ==========================
+// SWAP
+// ==========================
+
+function calculateSwap() {
 
     const amount =
     parseFloat(
@@ -180,7 +204,7 @@ function calculateSwap(){
     "toCoin"
     ).value;
 
-    if(isNaN(amount)){
+    if (isNaN(amount)) {
 
         document.getElementById(
         "swapResult"
@@ -193,60 +217,60 @@ function calculateSwap(){
 
     let usdValue = 0;
 
-    if(fromCoin === "BTC"){
+    if (fromCoin === "BTC") {
 
         usdValue =
         amount * btcPrice;
 
     }
 
-    if(fromCoin === "ETH"){
+    if (fromCoin === "ETH") {
 
         usdValue =
         amount * ethPrice;
 
     }
 
-    if(fromCoin === "BNB"){
+    if (fromCoin === "BNB") {
 
         usdValue =
         amount * bnbPrice;
 
     }
 
-    if(fromCoin === "USDT"){
+    if (fromCoin === "USDT") {
 
         usdValue =
         amount;
 
     }
 
-    let received = 0;
+    let result = 0;
 
-    if(toCoin === "BTC"){
+    if (toCoin === "BTC") {
 
-        received =
+        result =
         usdValue / btcPrice;
 
     }
 
-    if(toCoin === "ETH"){
+    if (toCoin === "ETH") {
 
-        received =
+        result =
         usdValue / ethPrice;
 
     }
 
-    if(toCoin === "BNB"){
+    if (toCoin === "BNB") {
 
-        received =
+        result =
         usdValue / bnbPrice;
 
     }
 
-    if(toCoin === "USDT"){
+    if (toCoin === "USDT") {
 
-        received =
+        result =
         usdValue;
 
     }
@@ -255,121 +279,62 @@ function calculateSwap(){
     "swapResult"
     ).innerHTML =
 
-    "Vous recevrez environ " +
+    "Vous recevrez environ "
 
-    received.toFixed(6) +
+    +
 
-    " " +
+    result.toFixed(6)
+
+    +
+
+    " "
+
+    +
 
     toCoin;
 
 }
 
-// ===============================
-// SWAP
-// ===============================
-
-function swapCrypto(){
+function swapCrypto() {
 
     calculateSwap();
 
     alert(
-    "Swap simulé avec succès."
+    "Simulation de swap effectuée."
     );
 
 }
 
-// ===============================
-// ACHAT
-// ===============================
-
-function buyCrypto(){
-
-    alert(
-    "Fonction Acheter prête."
-    );
-
-}
-
-// ===============================
-// ENVOYER
-// ===============================
-
-function sendCrypto(){
-
-    alert(
-    "Fonction Envoyer prête."
-    );
-
-}
-
-// ===============================
-// SOLDE
-// ===============================
-
-let balance =
-24580;
-
-setInterval(() => {
-
-    const randomMove =
-    Math.floor(
-    Math.random() * 200 - 100
-    );
-
-    balance +=
-    randomMove;
-
-    if(balance < 1000){
-
-        balance =
-        1000;
-
-    }
-
-    document.getElementById(
-    "balance"
-    ).innerHTML =
-
-    "$" +
-
-    balance.toLocaleString()
-
-    + ".00";
-
-}, 5000);
-
-// ===============================
+// ==========================
 // PWA
-// ===============================
+// ==========================
 
-if("serviceWorker" in navigator){
+if ("serviceWorker" in navigator) {
 
-window.addEventListener(
+    window.addEventListener(
+    "load",
 
-"load",
+    () => {
 
-() => {
+        navigator.serviceWorker
+        .register(
+        "./service-worker.js"
+        )
 
-navigator.serviceWorker
-.register(
-"./service-worker.js"
-)
+        .then(() => {
 
-.then(() => {
+            console.log(
+            "Service Worker installé"
+            );
 
-console.log(
-"Service Worker installé"
-);
+        })
 
-})
+        .catch(error => {
 
-.catch(error => {
+            console.log(error);
 
-console.log(error);
+        });
 
-});
-
-});
+    });
 
 }
