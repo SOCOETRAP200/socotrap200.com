@@ -2,52 +2,41 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:Arial, sans-serif;
 }
 
 body{
-background:#0b0f1a;
-color:white;
+background:#f4f6fb;
+color:#111;
 }
 
 .app{
-max-width:430px;
+max-width:500px;
 margin:auto;
-min-height:100vh;
-padding:20px;
-padding-bottom:100px;
+padding-bottom:90px;
 }
-
-/* PAGES */
-
-.page{
-display:none;
-}
-
-.page.active{
-display:block;
-}
-
-/* HEADER */
 
 .top-header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:20px;
+padding:15px;
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 
 .wallet-user{
 display:flex;
 align-items:center;
-gap:12px;
+gap:10px;
 }
 
 .avatar{
-width:50px;
-height:50px;
+width:45px;
+height:45px;
 border-radius:50%;
 background:#3375ff;
+color:#fff;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -55,123 +44,109 @@ font-size:20px;
 font-weight:bold;
 }
 
-.wallet-user h2{
-font-size:20px;
-}
-
-.wallet-user span{
-font-size:13px;
-color:#9ca3af;
-}
-
 .notification-btn{
-width:42px;
-height:42px;
 border:none;
-border-radius:50%;
-background:#161d2e;
-color:white;
+background:none;
+font-size:22px;
 cursor:pointer;
 }
 
-/* BALANCE */
+.page{
+display:none;
+padding:15px;
+}
+
+.page.active{
+display:block;
+}
 
 .balance-card{
-background:linear-gradient(
-135deg,
-#3375ff,
-#1d4ed8
-);
+background:linear-gradient(135deg,#3375ff,#4f92ff);
+color:white;
 padding:25px;
-border-radius:25px;
-margin-bottom:20px;
+border-radius:20px;
+margin-top:15px;
+text-align:center;
 }
 
 .balance-label{
-font-size:14px;
-opacity:.9;
-margin-bottom:10px;
+opacity:0.8;
+margin-bottom:8px;
 }
 
-#balance{
-font-size:38px;
-font-weight:bold;
+.balance-card h1{
+font-size:36px;
 margin-bottom:10px;
 }
 
 .market-indicator{
-display:inline-block;
-padding:8px 14px;
-border-radius:20px;
-background:rgba(255,255,255,.2);
+font-size:14px;
 }
 
-/* CONNECT */
-
 .wallet-connect-card{
-background:#161d2e;
-padding:18px;
-border-radius:18px;
-margin-bottom:20px;
+background:#fff;
+padding:20px;
+border-radius:15px;
+margin-top:15px;
+text-align:center;
 }
 
 .connect-btn{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
 background:#3375ff;
 color:white;
-font-weight:bold;
+border:none;
+padding:12px 20px;
+border-radius:12px;
 cursor:pointer;
-margin-bottom:15px;
+font-size:15px;
+margin-bottom:10px;
 }
 
-.wallet-info{
+.connect-btn:hover{
+opacity:0.9;
+}
+
+#walletAddress{
 font-size:13px;
 word-break:break-all;
+margin-top:10px;
 }
-
-/* ACTIONS */
 
 .quick-actions{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:10px;
-margin-bottom:20px;
+margin-top:20px;
 }
 
 .action-item{
-background:#161d2e;
+background:white;
 border:none;
-border-radius:18px;
 padding:15px;
-color:white;
-cursor:pointer;
-
+border-radius:15px;
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:8px;
+gap:5px;
+font-size:18px;
+cursor:pointer;
 }
 
 .action-item span{
-font-size:12px;
+font-size:13px;
 }
 
-/* TOKENS */
-
 .token-list{
+margin-top:20px;
 display:flex;
 flex-direction:column;
 gap:12px;
 }
 
 .token-card{
-background:#161d2e;
-padding:16px;
-border-radius:18px;
-
+background:white;
+border-radius:15px;
+padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -183,28 +158,16 @@ align-items:center;
 gap:12px;
 }
 
-.token-right{
-text-align:right;
-}
-
-.token-right p{
-font-size:12px;
-color:#9ca3af;
-}
-
-/* LOGOS */
-
 .coin-logo{
-width:44px;
-height:44px;
+width:45px;
+height:45px;
 border-radius:50%;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 font-weight:bold;
-font-size:18px;
+font-size:20px;
+color:white;
 }
 
 .btc{
@@ -217,117 +180,100 @@ background:#627eea;
 
 .bnb{
 background:#f3ba2f;
-color:black;
 }
 
 .usdt{
 background:#26a17b;
 }
 
-.pi{
-background:#7b3fe4;
+.token-right{
+text-align:right;
 }
-
-/* MARKET */
 
 .market-box,
 .history-box,
 .settings-box{
-background:#161d2e;
+background:white;
 padding:20px;
-border-radius:18px;
+border-radius:15px;
 margin-top:15px;
 }
 
-/* SWAP */
-
-#swapPage h2{
-margin-bottom:15px;
-}
-
-#swapPage select,
-#swapPage input{
+select,
+input{
 width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-background:#161d2e;
-color:white;
-margin-bottom:12px;
-}
-
-#swapResult{
-background:#161d2e;
-padding:15px;
-border-radius:12px;
-margin-bottom:15px;
+padding:12px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:15px;
 }
 
 .swap-btn{
 width:100%;
-padding:15px;
-border:none;
-border-radius:12px;
+margin-top:15px;
 background:#3375ff;
 color:white;
-font-weight:bold;
+border:none;
+padding:15px;
+border-radius:12px;
+font-size:16px;
 cursor:pointer;
 }
-
-/* BOTTOM NAV */
 
 .bottom-nav{
 position:fixed;
 bottom:0;
 left:0;
-width:100%;
-
-background:#111827;
-
-border-top:
-1px solid #1f2937;
-
+right:0;
+max-width:500px;
+margin:auto;
+background:white;
 display:flex;
 justify-content:space-around;
-
-padding:12px 0;
-
-z-index:999;
+padding:10px 0;
+box-shadow:0 -2px 10px rgba(0,0,0,0.08);
 }
 
 .nav-btn{
-background:none;
 border:none;
-color:#9ca3af;
-
+background:none;
 display:flex;
 flex-direction:column;
 align-items:center;
-
-gap:4px;
-
+font-size:20px;
 cursor:pointer;
 }
 
-.nav-btn.active{
-color:#3375ff;
+.nav-btn span{
+font-size:11px;
+margin-top:3px;
 }
 
-/* RESPONSIVE */
+#qrcode{
+display:flex;
+justify-content:center;
+margin-top:20px;
+}
+
+.positive{
+color:#00b050;
+font-weight:bold;
+}
+
+.negative{
+color:#ff3b30;
+font-weight:bold;
+}
 
 @media(max-width:480px){
 
-#balance{
-font-size:32px;
+.balance-card h1{
+font-size:30px;
 }
 
 .quick-actions{
-grid-template-columns:
-repeat(4,1fr);
-}
-
-.action-item{
-padding:12px;
+grid-template-columns:repeat(2,1fr);
 }
 
 }
