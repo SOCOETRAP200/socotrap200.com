@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +11,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="wallet.css">
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.1/dist/ethers.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6/dist/ethers.umd.min.js"></script>
 
 </head>
 
@@ -21,16 +23,25 @@
 
 <div class="wallet-user">
 
-<div class="avatar">S</div>
+<div class="avatar">
+S
+</div>
 
 <div>
+
 <h2>SOCO Wallet</h2>
-<span>Portefeuille Principal</span>
-</div>
+
+<span>
+Portefeuille Principal
+</span>
 
 </div>
 
-<button class="notification-btn">🔔</button>
+</div>
+
+<button class="notification-btn">
+🔔
+</button>
 
 </header>
 
@@ -38,12 +49,20 @@
 
 <div class="balance-card">
 
-<p class="balance-label">Valeur Totale</p>
+<p class="balance-label">
+Valeur Totale
+</p>
 
-<h1 id="balance">$24,580.00</h1>
+<h1 id="balance">
+$0.00
+</h1>
 
 <div class="market-indicator">
-<span id="marketStatus">Chargement...</span>
+
+<span id="marketStatus">
+Chargement...
+</span>
+
 </div>
 
 </div>
@@ -59,39 +78,70 @@ Connecter MetaMask
 </button>
 
 <p id="walletAddress">
+
 Non connecté
+
 </p>
 
 <p id="walletBalance">
+
 0 ETH
+
 </p>
 
 </div>
 
 <div class="quick-actions">
 
-<button class="action-item">
+<button
+class="action-item">
+
 📤
-<span>Envoyer</span>
+
+<span>
+Envoyer
+</span>
+
 </button>
 
-<button class="action-item">
+<button
+class="action-item"
+onclick="copyAddress()">
+
 📥
-<span>Recevoir</span>
+
+<span>
+Recevoir
+</span>
+
 </button>
 
-<button class="action-item">
+<button
+class="action-item">
+
 💳
-<span>Acheter</span>
+
+<span>
+Acheter
+</span>
+
 </button>
 
-<button class="action-item"
+<button
+class="action-item"
 onclick="showPage('swapPage')">
+
 🔄
-<span>Swap</span>
+
+<span>
+Swap
+</span>
+
 </button>
 
 </div>
+
+<div id="qrcode"></div>
 
 <div class="token-list">
 
@@ -99,20 +149,33 @@ onclick="showPage('swapPage')">
 
 <div class="token-left">
 
-<div class="coin-logo btc">₿</div>
+<div class="coin-logo btc">
+₿
+</div>
 
 <div>
-<strong>Bitcoin</strong>
-<p>BTC</p>
+
+<strong>
+Bitcoin
+</strong>
+
+<p>
+BTC
+</p>
+
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="btcPrice">...</strong>
+<strong id="btcPrice">
+...
+</strong>
 
-<p id="btcChange">...</p>
+<p id="btcChange">
+...
+</p>
 
 </div>
 
@@ -122,20 +185,33 @@ onclick="showPage('swapPage')">
 
 <div class="token-left">
 
-<div class="coin-logo eth">Ξ</div>
+<div class="coin-logo eth">
+Ξ
+</div>
 
 <div>
-<strong>Ethereum</strong>
-<p>ETH</p>
+
+<strong>
+Ethereum
+</strong>
+
+<p>
+ETH
+</p>
+
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="ethPrice">...</strong>
+<strong id="ethPrice">
+...
+</strong>
 
-<p id="ethChange">...</p>
+<p id="ethChange">
+...
+</p>
 
 </div>
 
@@ -145,20 +221,33 @@ onclick="showPage('swapPage')">
 
 <div class="token-left">
 
-<div class="coin-logo bnb">◆</div>
+<div class="coin-logo bnb">
+◆
+</div>
 
 <div>
-<strong>BNB</strong>
-<p>BNB</p>
+
+<strong>
+BNB
+</strong>
+
+<p>
+BNB
+</p>
+
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="bnbPrice">...</strong>
+<strong id="bnbPrice">
+...
+</strong>
 
-<p id="bnbChange">...</p>
+<p id="bnbChange">
+...
+</p>
 
 </div>
 
@@ -168,20 +257,33 @@ onclick="showPage('swapPage')">
 
 <div class="token-left">
 
-<div class="coin-logo usdt">₮</div>
+<div class="coin-logo usdt">
+₮
+</div>
 
 <div>
-<strong>Tether</strong>
-<p>USDT</p>
+
+<strong>
+USDT
+</strong>
+
+<p>
+Tether
+</p>
+
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="usdtPrice">...</strong>
+<strong id="usdtPrice">
+...
+</strong>
 
-<p>Stablecoin</p>
+<p>
+Stablecoin
+</p>
 
 </div>
 
@@ -191,42 +293,60 @@ onclick="showPage('swapPage')">
 
 </section>
 
-<section id="marketPage" class="page">
+<section
+id="marketPage"
+class="page">
 
-<h2>Marché</h2>
+<h2>
+Marché Crypto
+</h2>
 
 <div class="market-box">
+
+<p>
 Prix en temps réel
+</p>
+
 </div>
 
 </section>
 
-<section id="swapPage" class="page">
+<section
+id="swapPage"
+class="page">
 
-<h2>Swap</h2>
+<h2>
+Swap Crypto
+</h2>
 
 <select id="fromCoin">
+
 <option>BTC</option>
 <option>ETH</option>
 <option>BNB</option>
 <option>USDT</option>
+
 </select>
 
 <select id="toCoin">
+
 <option>USDT</option>
 <option>BTC</option>
 <option>ETH</option>
 <option>BNB</option>
+
 </select>
 
 <input
-id="swapAmount"
 type="number"
+id="swapAmount"
 placeholder="Montant"
 onkeyup="calculateSwap()">
 
 <p id="swapResult">
+
 Vous recevrez...
+
 </p>
 
 <button
@@ -239,21 +359,29 @@ Effectuer le Swap
 
 </section>
 
-<section id="historyPage" class="page">
+<section
+id="historyPage"
+class="page">
 
-<h2>Historique</h2>
+<h2>
+Historique
+</h2>
 
 <div class="history-box">
 
-Aucune transaction.
+Aucune transaction
 
 </div>
 
 </section>
 
-<section id="settingsPage" class="page">
+<section
+id="settingsPage"
+class="page">
 
-<h2>Paramètres</h2>
+<h2>
+Paramètres
+</h2>
 
 <div class="settings-box">
 
@@ -270,7 +398,10 @@ class="nav-btn"
 onclick="showPage('homePage')">
 
 🏠
-<span>Accueil</span>
+
+<span>
+Accueil
+</span>
 
 </button>
 
@@ -279,7 +410,10 @@ class="nav-btn"
 onclick="showPage('marketPage')">
 
 📈
-<span>Marché</span>
+
+<span>
+Marché
+</span>
 
 </button>
 
@@ -288,7 +422,10 @@ class="nav-btn"
 onclick="showPage('swapPage')">
 
 🔄
-<span>Swap</span>
+
+<span>
+Swap
+</span>
 
 </button>
 
@@ -297,7 +434,10 @@ class="nav-btn"
 onclick="showPage('historyPage')">
 
 🕒
-<span>Historique</span>
+
+<span>
+Historique
+</span>
 
 </button>
 
@@ -306,7 +446,10 @@ class="nav-btn"
 onclick="showPage('settingsPage')">
 
 ⚙️
-<span>Paramètres</span>
+
+<span>
+Paramètres
+</span>
 
 </button>
 
@@ -314,7 +457,10 @@ onclick="showPage('settingsPage')">
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script src="wallet.js"></script>
 
 </body>
+
 </html>
