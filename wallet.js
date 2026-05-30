@@ -1,279 +1,235 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+// Navigation entre les pages
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
 }
 
-body{
-background:#f4f6fb;
-color:#111;
+// Connexion MetaMask
+async function connectWallet() {
+
+    if (!window.ethereum) {
+        alert("MetaMask n'est pas installé.");
+        return;
+    }
+
+    try {
+
+        const accounts = await ethereum.request({
+            method: 'eth_requestAccounts'
+        });
+
+        const address = accounts[0];
+
+        document.getElementById("walletAddress").innerText = address;
+
+        const provider = new ethers.BrowserProvider(window.ethereum);
+
+        const balance = await provider.getBalance(address);
+
+        const ethBalance = ethers.formatEther(balance);
+
+        document.getElementById("walletBalance").innerText =
+            parseFloat(ethBalance).toFixed(4) + " ETH";
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 }
 
-.app{
-max-width:500px;
-margin:auto;
-padding-bottom:90px;
+// Copier adresse
+function copyAddress() {
+
+    const address =
+        document.getElementById("walletAddress").innerText;
+
+    if (
+        address === "Non connecté"
+    ) {
+        alert("Connectez MetaMask d'abord");
+        return;
+    }
+
+    navigator.clipboard.writeText(address);
+
+    alert("Adresse copiée");
 }
 
-.top-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px;
-background:#fff;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
+// Prix crypto en temps réel
+async function loadPrices() {
+
+    try {
+
+        const response = await fetch(
+            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,tether&vs_currencies=usd&include_24hr_change=true"
+        );
+
+        const data = await response.json();
+
+        document.getElementById("btcPrice").innerText =
+            "$" + data.bitcoin.usd;
+
+        document.getElementById("ethPrice").innerText =
+            "$" + data.ethereum.usd;
+
+        document.getElementById("bnbPrice").innerText =
+            "$" + data.binancecoin.usd;
+
+        document.getElementById("usdtPrice").innerText =
+            "$" + data.tether.usd;
+
+        setChange(
+            "btcChange",
+            data.bitcoin.usd_24h_change
+        );
+
+        setChange(
+            "ethChange",
+            data.ethereum.usd_24h_change
+        );
+
+        setChange(
+            "bnbChange",
+            data.binancecoin.usd_24h_change
+        );
+
+        const marketAverage =
+            (
+                data.bitcoin.usd_24h_change +
+                data.ethereum.usd_24h_change +
+                data.binancecoin.usd_24h_change
+            ) / 3;
+
+        const marketStatus =
+            document.getElementById("marketStatus");
+
+        if (marketAverage >= 0) {
+
+            marketStatus.innerHTML =
+                "📈 Marché haussier +" +
+                marketAverage.toFixed(2) +
+                "%";
+
+        } else {
+
+            marketStatus.innerHTML =
+                "📉 Marché baissier " +
+                marketAverage.toFixed(2) +
+                "%";
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 }
 
-.wallet-user{
-display:flex;
-align-items:center;
-gap:10px;
+// Couleurs variation
+function setChange(elementId, value) {
+
+    const element =
+        document.getElementById(elementId);
+
+    const percent =
+        parseFloat(value).toFixed(2);
+
+    if (value >= 0) {
+
+        element.innerHTML =
+            "+" + percent + "%";
+
+        element.className =
+            "positive";
+
+    } else {
+
+        element.innerHTML =
+            percent + "%";
+
+        element.className =
+            "negative";
+
+    }
 }
 
-.avatar{
-width:45px;
-height:45px;
-border-radius:50%;
-background:#3375ff;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
-font-weight:bold;
+// QR Code
+function generateQRCode() {
+
+    const qrContainer =
+        document.getElementById("qrcode");
+
+    qrContainer.innerHTML = "";
+
+    new QRCode(qrContainer, {
+        text:
+            document.getElementById("walletAddress").innerText ||
+            "SOCO-WALLET",
+        width: 150,
+        height: 150
+    });
 }
 
-.notification-btn{
-border:none;
-background:none;
-font-size:22px;
-cursor:pointer;
+// Calcul swap démo
+function calculateSwap() {
+
+    const amount =
+        parseFloat(
+            document.getElementById("swapAmount").value
+        ) || 0;
+
+    document.getElementById("swapResult").innerText =
+        "Vous recevrez " +
+        amount.toFixed(4);
 }
 
-.page{
-display:none;
-padding:15px;
+// Swap démo
+function swapCrypto() {
+
+    const amount =
+        document.getElementById("swapAmount").value;
+
+    if (!amount || amount <= 0) {
+
+        alert("Entrez un montant valide");
+
+        return;
+
+    }
+
+    alert(
+        "Swap simulé avec succès"
+    );
 }
 
-.page.active{
-display:block;
-}
+// Enregistrement service worker
+if ("serviceWorker" in navigator) {
 
-.balance-card{
-background:linear-gradient(135deg,#3375ff,#4f92ff);
-color:white;
-padding:25px;
-border-radius:20px;
-margin-top:15px;
-text-align:center;
-}
+    window.addEventListener("load", () => {
 
-.balance-label{
-opacity:0.8;
-margin-bottom:8px;
-}
+        navigator.serviceWorker.register(
+            "service-worker.js"
+        );
 
-.balance-card h1{
-font-size:36px;
-margin-bottom:10px;
-}
-
-.market-indicator{
-font-size:14px;
-}
-
-.wallet-connect-card{
-background:#fff;
-padding:20px;
-border-radius:15px;
-margin-top:15px;
-text-align:center;
-}
-
-.connect-btn{
-background:#3375ff;
-color:white;
-border:none;
-padding:12px 20px;
-border-radius:12px;
-cursor:pointer;
-font-size:15px;
-margin-bottom:10px;
-}
-
-.connect-btn:hover{
-opacity:0.9;
-}
-
-#walletAddress{
-font-size:13px;
-word-break:break-all;
-margin-top:10px;
-}
-
-.quick-actions{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin-top:20px;
-}
-
-.action-item{
-background:white;
-border:none;
-padding:15px;
-border-radius:15px;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:5px;
-font-size:18px;
-cursor:pointer;
-}
-
-.action-item span{
-font-size:13px;
-}
-
-.token-list{
-margin-top:20px;
-display:flex;
-flex-direction:column;
-gap:12px;
-}
-
-.token-card{
-background:white;
-border-radius:15px;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.token-left{
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.coin-logo{
-width:45px;
-height:45px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-font-size:20px;
-color:white;
-}
-
-.btc{
-background:#f7931a;
-}
-
-.eth{
-background:#627eea;
-}
-
-.bnb{
-background:#f3ba2f;
-}
-
-.usdt{
-background:#26a17b;
-}
-
-.token-right{
-text-align:right;
-}
-
-.market-box,
-.history-box,
-.settings-box{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-top:15px;
-}
-
-select,
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:1px solid #ddd;
-border-radius:10px;
-font-size:15px;
-}
-
-.swap-btn{
-width:100%;
-margin-top:15px;
-background:#3375ff;
-color:white;
-border:none;
-padding:15px;
-border-radius:12px;
-font-size:16px;
-cursor:pointer;
-}
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-max-width:500px;
-margin:auto;
-background:white;
-display:flex;
-justify-content:space-around;
-padding:10px 0;
-box-shadow:0 -2px 10px rgba(0,0,0,0.08);
-}
-
-.nav-btn{
-border:none;
-background:none;
-display:flex;
-flex-direction:column;
-align-items:center;
-font-size:20px;
-cursor:pointer;
-}
-
-.nav-btn span{
-font-size:11px;
-margin-top:3px;
-}
-
-#qrcode{
-display:flex;
-justify-content:center;
-margin-top:20px;
-}
-
-.positive{
-color:#00b050;
-font-weight:bold;
-}
-
-.negative{
-color:#ff3b30;
-font-weight:bold;
-}
-
-@media(max-width:480px){
-
-.balance-card h1{
-font-size:30px;
-}
-
-.quick-actions{
-grid-template-columns:repeat(2,1fr);
-}
+    });
 
 }
+
+// Initialisation
+window.onload = () => {
+
+    loadPrices();
+
+    setInterval(
+        loadPrices,
+        30000
+    );
+
+    generateQRCode();
+
+};
