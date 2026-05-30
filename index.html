@@ -1,384 +1,131 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SOCO Wallet</title>
-
-<meta name="theme-color" content="#3375ff">
-
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="wallet.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOCOTRAP Wallet</title>
+    <link rel="stylesheet" href="wallet.css">
+    <script defer src="wallet.js"></script>
 </head>
-
 <body>
 
-<div class="app">
-
-    <!-- HEADER -->
-    <header class="top-header">
-
-        <div class="wallet-user">
-
-            <div class="avatar">
-                S
-            </div>
-
-            <div>
-                <h2>SOCO Wallet</h2>
-                <span>Portefeuille principal</span>
-            </div>
-
+    <header>
+        <h1>SOCOTRAP Wallet</h1>
+        <div class="balance">
+            <h2>Solde Total</h2>
+            <p id="totalBalance">$0.00</p>
         </div>
-
-        <button class="notification-btn">
-            🔔
-        </button>
-
     </header>
 
-
-    <!-- BALANCE CARD -->
-    <section class="balance-card">
-
-        <p class="balance-label">
-            Valeur Totale
-        </p>
-
-        <h1 id="balance">
-            $24,580.00
-        </h1>
-
-        <div class="market-indicator">
-            <span id="marketStatus">
-                Chargement...
-            </span>
-        </div>
-
+    <section class="actions">
+        <button onclick="showSend()">Envoyer</button>
+        <button onclick="showReceive()">Recevoir</button>
+        <button onclick="showBuy()">Acheter</button>
+        <button onclick="showSwap()">Swap</button>
     </section>
 
+    <section class="tokens">
+        <h2>Tokens</h2>
 
-    <!-- ACTIONS -->
-    <section class="quick-actions">
+        <div class="token" onclick="openToken('BTC')">
+            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC">
+            <div>
+                <h3>Bitcoin</h3>
+                <p id="btcPrice">$0.00</p>
+            </div>
+            <span class="positive">+0.00%</span>
+        </div>
 
-        <button class="action-item" onclick="openModal('sendModal')">
-            <div class="action-icon">📤</div>
-            <span>Envoyer</span>
-        </button>
+        <div class="token" onclick="openToken('ETH')">
+            <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
+            <div>
+                <h3>Ethereum</h3>
+                <p id="ethPrice">$0.00</p>
+            </div>
+            <span class="negative">-0.00%</span>
+        </div>
 
-        <button class="action-item" onclick="openModal('receiveModal')">
-            <div class="action-icon">📥</div>
-            <span>Recevoir</span>
-        </button>
+        <div class="token" onclick="openToken('BNB')">
+            <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB">
+            <div>
+                <h3>BNB</h3>
+                <p id="bnbPrice">$0.00</p>
+            </div>
+            <span class="positive">+0.00%</span>
+        </div>
 
-        <button class="action-item" onclick="openModal('buyModal')">
-            <div class="action-icon">💳</div>
-            <span>Acheter</span>
-        </button>
-
-        <button class="action-item" onclick="openModal('swapModal')">
-            <div class="action-icon">🔄</div>
-            <span>Swap</span>
-        </button>
-
+        <div class="token" onclick="openToken('PI')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Pi_Network.svg/512px-Pi_Network.svg.png" alt="PI">
+            <div>
+                <h3>Pi Network</h3>
+                <p id="piPrice">$0.00</p>
+            </div>
+            <span class="positive">+0.00%</span>
+        </div>
     </section>
 
-
-    <!-- TABS -->
-    <section class="tabs">
-
-        <button class="tab active">
-            Tokens
-        </button>
-
-        <button class="tab">
-            NFTs
-        </button>
-
+    <section id="market">
+        <h2>Marché Crypto</h2>
+        <div id="marketData"></div>
     </section>
 
-
-    <!-- TOKENS -->
-    <section class="token-list">
-
-        <div class="token-card">
-
-            <div class="token-left">
-                <div class="coin-logo btc">
-                    ₿
-                </div>
-
-                <div>
-                    <strong>Bitcoin</strong>
-                    <p>BTC</p>
-                </div>
-            </div>
-
-            <div class="token-right">
-                <strong id="btcPrice">...</strong>
-                <p id="btcChange">...</p>
-            </div>
-
+    <section id="nfts">
+        <h2>NFTs</h2>
+        <div class="nft-card">
+            <img src="https://via.placeholder.com/150" alt="NFT">
+            <p>Mon NFT</p>
         </div>
-
-
-        <div class="token-card">
-
-            <div class="token-left">
-                <div class="coin-logo eth">
-                    Ξ
-                </div>
-
-                <div>
-                    <strong>Ethereum</strong>
-                    <p>ETH</p>
-                </div>
-            </div>
-
-            <div class="token-right">
-                <strong id="ethPrice">...</strong>
-                <p id="ethChange">...</p>
-            </div>
-
-        </div>
-
-
-        <div class="token-card">
-
-            <div class="token-left">
-                <div class="coin-logo bnb">
-                    ◆
-                </div>
-
-                <div>
-                    <strong>BNB</strong>
-                    <p>BNB</p>
-                </div>
-            </div>
-
-            <div class="token-right">
-                <strong id="bnbPrice">...</strong>
-                <p id="bnbChange">...</p>
-            </div>
-
-        </div>
-
-
-        <div class="token-card">
-
-            <div class="token-left">
-                <div class="coin-logo usdt">
-                    ₮
-                </div>
-
-                <div>
-                    <strong>Tether</strong>
-                    <p>USDT</p>
-                </div>
-            </div>
-
-            <div class="token-right">
-                <strong id="usdtPrice">...</strong>
-                <p>Stablecoin</p>
-            </div>
-
-        </div>
-
-
-        <div class="token-card">
-
-            <div class="token-left">
-                <div class="coin-logo pi">
-                    π
-                </div>
-
-                <div>
-                    <strong>Pi Coin</strong>
-                    <p>PI</p>
-                </div>
-            </div>
-
-            <div class="token-right">
-                <strong id="piPrice">
-                    À configurer
-                </strong>
-                <p>PI</p>
-            </div>
-
-        </div>
-
     </section>
 
-
-    <!-- MARKET -->
-    <section class="market-section">
-
-        <div class="section-header">
-
-            <h3>Marché</h3>
-
-            <button>
-                Voir tout
-            </button>
-
-        </div>
-
-        <div class="market-box">
-
-            <p>
-                Prix en temps réel via API.
-            </p>
-
-        </div>
-
+    <section id="sendSection" style="display:none;">
+        <h2>Envoyer</h2>
+        <input type="text" placeholder="Adresse du destinataire">
+        <input type="number" placeholder="Montant">
+        <button>Confirmer</button>
+        <button onclick="closeForms()">Annuler</button>
     </section>
 
+    <section id="receiveSection" style="display:none;">
+        <h2>Recevoir</h2>
+        <p>Adresse :</p>
+        <input type="text" value="0x123456789abcdef" readonly>
+        <button>Copier</button>
+    </section>
 
-    <!-- SEND -->
-    <div id="sendModal" class="modal">
+    <section id="swapSection" style="display:none;">
+        <h2>Swap</h2>
 
-        <div class="modal-content">
+        <select>
+            <option>BTC</option>
+            <option>ETH</option>
+            <option>BNB</option>
+            <option>PI</option>
+        </select>
 
-            <h2>Envoyer</h2>
+        <select>
+            <option>ETH</option>
+            <option>BTC</option>
+            <option>BNB</option>
+            <option>PI</option>
+        </select>
 
-            <input
-                type="text"
-                placeholder="Adresse du portefeuille">
+        <button>Échanger</button>
+    </section>
 
-            <input
-                type="number"
-                placeholder="Montant">
+    <section id="buySection" style="display:none;">
+        <h2>Acheter</h2>
 
-            <button onclick="sendCrypto()">
-                Confirmer
-            </button>
+        <button>Payer par Carte</button>
+        <button>Payer en Crypto</button>
+    </section>
 
-            <button onclick="closeModal('sendModal')">
-                Fermer
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- RECEIVE -->
-    <div id="receiveModal" class="modal">
-
-        <div class="modal-content">
-
-            <h2>Recevoir</h2>
-
-            <p class="wallet-address">
-                0x123456789ABCDEF123456789
-            </p>
-
-            <button onclick="closeModal('receiveModal')">
-                Fermer
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- BUY -->
-    <div id="buyModal" class="modal">
-
-        <div class="modal-content">
-
-            <h2>Acheter</h2>
-
-            <p>
-                Intégration future.
-            </p>
-
-            <button onclick="buyCrypto()">
-                Continuer
-            </button>
-
-            <button onclick="closeModal('buyModal')">
-                Fermer
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- SWAP -->
-    <div id="swapModal" class="modal">
-
-        <div class="modal-content">
-
-            <h2>Swap</h2>
-
-            <select id="fromCoin">
-                <option>BTC</option>
-                <option>ETH</option>
-                <option>BNB</option>
-                <option>USDT</option>
-            </select>
-
-            <select id="toCoin">
-                <option>USDT</option>
-                <option>BNB</option>
-                <option>ETH</option>
-                <option>BTC</option>
-            </select>
-
-            <input
-                id="swapAmount"
-                type="number"
-                placeholder="Montant">
-
-            <button onclick="swapCrypto()">
-                Effectuer le Swap
-            </button>
-
-            <button onclick="closeModal('swapModal')">
-                Fermer
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
-
-        <button class="nav-btn active">
-            🏠
-            <span>Accueil</span>
-        </button>
-
-        <button class="nav-btn">
-            📈
-            <span>Marché</span>
-        </button>
-
-        <button class="nav-btn">
-            🔄
-            <span>Swap</span>
-        </button>
-
-        <button class="nav-btn">
-            🕒
-            <span>Historique</span>
-        </button>
-
-        <button class="nav-btn">
-            ⚙️
-            <span>Paramètres</span>
-        </button>
-
+        <button>Accueil</button>
+        <button>Marché</button>
+        <button>Swap</button>
+        <button>NFTs</button>
+        <button>Paramètres</button>
     </nav>
-
-</div>
-
-<script src="wallet.js"></script>
 
 </body>
 </html>
