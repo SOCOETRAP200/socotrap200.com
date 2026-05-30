@@ -1,230 +1,292 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOCO Wallet</title>
-  <link rel="stylesheet" href="wallet.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SOCO Wallet</title>
+
+<link rel="stylesheet" href="wallet.css">
+
 </head>
+
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <!-- HEADER -->
-    <div class="header">
-      <div>
-        <h2>SOCO Wallet</h2>
-        <p>Mon portefeuille</p>
-      </div>
+    <header class="header">
 
-      <div class="profile">
-        <img src="https://i.imgur.com/2DhmtJ4.png" alt="profile">
-      </div>
-    </div>
-
-
-    <!-- CARD -->
-    <div class="wallet-card">
-
-      <div class="balance-title">
-        Solde Total
-      </div>
-
-      <h1 id="balance">$24,580.90</h1>
-
-      <div class="market">
-        <span id="marketStatus">▲ +2.45%</span>
-      </div>
-
-
-      <!-- ACTIONS -->
-      <div class="actions">
-
-        <div class="action-btn">
-          <div class="circle blue">
-            ↑
-          </div>
-          <p>Envoyer</p>
-        </div>
-
-        <div class="action-btn">
-          <div class="circle green">
-            ↓
-          </div>
-          <p>Recevoir</p>
-        </div>
-
-        <div class="action-btn">
-          <div class="circle orange">
-            💳
-          </div>
-          <p>Acheter</p>
-        </div>
-
-        <div class="action-btn">
-          <div class="circle red">
-            ⇄
-          </div>
-          <p>Vendre</p>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- TOKENS -->
-    <div class="section-title">
-      Mes Cryptos
-    </div>
-
-
-    <div class="token-list">
-
-      <div class="token">
-        <div class="token-left">
-          <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029" alt="btc">
-
-          <div>
-            <h3>Bitcoin</h3>
-            <span>BTC</span>
-          </div>
-        </div>
-
-        <div class="token-right">
-          <h3>$15,430</h3>
-          <span class="positive">+4.5%</span>
-        </div>
-      </div>
-
-
-      <div class="token">
-        <div class="token-left">
-          <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=029" alt="eth">
-
-          <div>
-            <h3>Ethereum</h3>
-            <span>ETH</span>
-          </div>
-        </div>
-
-        <div class="token-right">
-          <h3>$5,800</h3>
-          <span class="negative">-1.2%</span>
-        </div>
-      </div>
-
-
-      <div class="token">
-        <div class="token-left">
-          <img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=029" alt="usdt">
-
-          <div>
-            <h3>Tether</h3>
-            <span>USDT</span>
-          </div>
-        </div>
-
-        <div class="token-right">
-          <h3>$2,500</h3>
-          <span class="positive">+0.3%</span>
-        </div>
-      </div>
-
-
-      <div class="token">
-        <div class="token-left">
-          <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=029" alt="bnb">
-
-          <div>
-            <h3>BNB</h3>
-            <span>BNB</span>
-          </div>
-        </div>
-
-        <div class="token-right">
-          <h3>$840</h3>
-          <span class="positive">+3.7%</span>
-        </div>
-      </div>
-
-    </div>
-
-
-    <!-- TRANSACTIONS -->
-    <div class="section-title">
-      Transactions Récentes
-    </div>
-
-
-    <div class="transactions">
-
-      <div class="transaction">
         <div>
-          <h4>Bitcoin reçu</h4>
-          <span>Aujourd'hui</span>
+            <h1>SOCO Wallet</h1>
+            <p>Mon portefeuille crypto</p>
         </div>
 
-        <div class="amount positive">
-          +0.004 BTC
-        </div>
-      </div>
-
-
-      <div class="transaction">
-        <div>
-          <h4>Ethereum envoyé</h4>
-          <span>Hier</span>
+        <div class="avatar">
+            G
         </div>
 
-        <div class="amount negative">
-          -0.25 ETH
-        </div>
-      </div>
+    </header>
 
 
-      <div class="transaction">
-        <div>
-          <h4>USDT acheté</h4>
-          <span>2 jours</span>
+    <section class="wallet-card">
+
+        <p class="balance-label">
+            Solde Total
+        </p>
+
+        <h2 id="balance">
+            $24,580.00
+        </h2>
+
+        <div class="market-status">
+            <span id="marketStatus">
+                Chargement...
+            </span>
         </div>
 
-        <div class="amount positive">
-          +250 USDT
+        <div class="actions">
+
+            <button class="action-btn" onclick="openModal('sendModal')">
+                📤
+                <span>Envoyer</span>
+            </button>
+
+            <button class="action-btn" onclick="openModal('receiveModal')">
+                📥
+                <span>Recevoir</span>
+            </button>
+
+            <button class="action-btn" onclick="openModal('buyModal')">
+                💳
+                <span>Acheter</span>
+            </button>
+
+            <button class="action-btn" onclick="openModal('sellModal')">
+                💰
+                <span>Vendre</span>
+            </button>
+
         </div>
-      </div>
+
+    </section>
+
+
+    <section class="market-section">
+
+        <h2>Marché Crypto</h2>
+
+        <div class="coin">
+
+            <div>
+                <strong>Bitcoin</strong>
+                <p>BTC</p>
+            </div>
+
+            <div class="price">
+                <span id="btcPrice">...</span>
+            </div>
+
+        </div>
+
+        <div class="coin">
+
+            <div>
+                <strong>Ethereum</strong>
+                <p>ETH</p>
+            </div>
+
+            <div class="price">
+                <span id="ethPrice">...</span>
+            </div>
+
+        </div>
+
+        <div class="coin">
+
+            <div>
+                <strong>BNB</strong>
+                <p>BNB</p>
+            </div>
+
+            <div class="price">
+                <span id="bnbPrice">...</span>
+            </div>
+
+        </div>
+
+        <div class="coin">
+
+            <div>
+                <strong>Tether</strong>
+                <p>USDT</p>
+            </div>
+
+            <div class="price">
+                <span id="usdtPrice">...</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="swap-section">
+
+        <h2>Swap</h2>
+
+        <select id="fromCoin">
+            <option>BTC</option>
+            <option>ETH</option>
+            <option>BNB</option>
+            <option>USDT</option>
+        </select>
+
+        <select id="toCoin">
+            <option>USDT</option>
+            <option>BNB</option>
+            <option>ETH</option>
+            <option>BTC</option>
+        </select>
+
+        <input
+            type="number"
+            id="swapAmount"
+            placeholder="Montant">
+
+        <button class="swap-btn"
+            onclick="swapCrypto()">
+            Effectuer le Swap
+        </button>
+
+    </section>
+
+
+    <section class="transactions">
+
+        <h2>Transactions Récentes</h2>
+
+        <div class="tx">
+            <span>Bitcoin reçu</span>
+            <strong class="positive">
+                +0.004 BTC
+            </strong>
+        </div>
+
+        <div class="tx">
+            <span>Ethereum envoyé</span>
+            <strong class="negative">
+                -0.12 ETH
+            </strong>
+        </div>
+
+        <div class="tx">
+            <span>USDT acheté</span>
+            <strong class="positive">
+                +250 USDT
+            </strong>
+        </div>
+
+    </section>
+
+</div>
+
+
+<div id="sendModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Envoyer</h2>
+
+        <input
+            type="text"
+            placeholder="Adresse du wallet">
+
+        <input
+            type="number"
+            placeholder="Montant">
+
+        <button onclick="sendCrypto()">
+            Confirmer
+        </button>
+
+        <button onclick="closeModal('sendModal')">
+            Fermer
+        </button>
 
     </div>
 
+</div>
 
-    <!-- BOTTOM NAV -->
-    <div class="bottom-nav">
 
-      <div class="nav-item active">
-        <span>🏠</span>
-        <p>Accueil</p>
-      </div>
+<div id="receiveModal" class="modal">
 
-      <div class="nav-item">
-        <span>📈</span>
-        <p>Marché</p>
-      </div>
+    <div class="modal-content">
 
-      <div class="nav-item">
-        <span>🔄</span>
-        <p>Swap</p>
-      </div>
+        <h2>Recevoir</h2>
 
-      <div class="nav-item">
-        <span>⚙️</span>
-        <p>Paramètres</p>
-      </div>
+        <p>
+            Adresse Wallet :
+        </p>
+
+        <p class="wallet-address">
+            0x123456789ABCDEF987654321
+        </p>
+
+        <button onclick="closeModal('receiveModal')">
+            Fermer
+        </button>
 
     </div>
 
-  </div>
+</div>
 
-  <script src="wallet.js"></script>
+
+<div id="buyModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Acheter Crypto</h2>
+
+        <p>
+            Fonction prête pour intégration.
+        </p>
+
+        <button onclick="buyCrypto()">
+            Acheter
+        </button>
+
+        <button onclick="closeModal('buyModal')">
+            Fermer
+        </button>
+
+    </div>
+
+</div>
+
+
+<div id="sellModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Vendre Crypto</h2>
+
+        <p>
+            Fonction prête pour intégration.
+        </p>
+
+        <button onclick="sellCrypto()">
+            Vendre
+        </button>
+
+        <button onclick="closeModal('sellModal')">
+            Fermer
+        </button>
+
+    </div>
+
+</div>
+
+<script src="wallet.js"></script>
+
 </body>
 </html>
