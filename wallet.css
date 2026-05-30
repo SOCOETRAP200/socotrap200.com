@@ -2,346 +2,242 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
     background:#0b0f1a;
-    color:#ffffff;
-}
-
-.app{
-    max-width:430px;
-    margin:auto;
+    color:white;
     min-height:100vh;
-    padding:20px;
-    padding-bottom:100px;
+    padding-bottom:90px;
 }
 
-/* HEADER */
-
-.top-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.wallet-user{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.avatar{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    background:#3375ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-    font-size:20px;
-}
-
-.wallet-user h2{
-    font-size:20px;
-}
-
-.wallet-user span{
-    color:#9ca3af;
-    font-size:13px;
-}
-
-.notification-btn{
-    border:none;
-    background:#161d2e;
-    color:white;
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    cursor:pointer;
-}
-
-/* BALANCE */
-
-.balance-card{
-    background:linear-gradient(
-        135deg,
-        #3375ff,
-        #1d4ed8
-    );
-
-    border-radius:25px;
+header{
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
     padding:25px;
-    margin-bottom:25px;
+    text-align:center;
+    border-bottom-left-radius:25px;
+    border-bottom-right-radius:25px;
 }
 
-.balance-label{
-    opacity:.8;
-    margin-bottom:10px;
-}
-
-#balance{
-    font-size:38px;
-    margin-bottom:12px;
-}
-
-.market-indicator{
-    display:inline-block;
-    background:rgba(255,255,255,.2);
-    padding:8px 14px;
-    border-radius:20px;
-}
-
-/* ACTIONS */
-
-.quick-actions{
-    display:grid;
-    grid-template-columns:
-    repeat(4,1fr);
-
-    gap:10px;
-    margin-bottom:25px;
-}
-
-.action-item{
-    background:#161d2e;
-    border:none;
-    color:white;
-    border-radius:18px;
-    padding:14px 8px;
-    cursor:pointer;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:8px;
-}
-
-.action-icon{
-    font-size:24px;
-}
-
-/* TABS */
-
-.tabs{
-    display:flex;
-    gap:10px;
-    margin-bottom:20px;
-}
-
-.tab{
-    flex:1;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#161d2e;
-    color:white;
-    cursor:pointer;
-}
-
-.tab.active{
-    background:#3375ff;
-}
-
-/* TOKENS */
-
-.token-list{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.token-card{
-    background:#161d2e;
-    border-radius:18px;
-    padding:16px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.token-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.token-left p{
-    color:#9ca3af;
-    font-size:13px;
-}
-
-.token-right{
-    text-align:right;
-}
-
-.token-right p{
-    color:#9ca3af;
-    font-size:13px;
-}
-
-/* COINS */
-
-.coin-logo{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:bold;
-}
-
-.btc{
-    background:#f7931a;
-}
-
-.eth{
-    background:#627eea;
-}
-
-.bnb{
-    background:#f3ba2f;
-    color:black;
-}
-
-.usdt{
-    background:#26a17b;
-}
-
-.pi{
-    background:#7b3fe4;
-}
-
-/* MARKET */
-
-.market-section{
-    margin-top:25px;
-}
-
-.section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:12px;
-}
-
-.section-header button{
-    background:none;
-    border:none;
-    color:#3375ff;
-}
-
-.market-box{
-    background:#161d2e;
-    border-radius:18px;
-    padding:20px;
-}
-
-/* MODAL */
-
-.modal{
-    display:none;
-    position:fixed;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,.75);
-
-    justify-content:center;
-    align-items:center;
-
-    z-index:999;
-}
-
-.modal-content{
-    width:90%;
-    max-width:400px;
-
-    background:#161d2e;
-
-    border-radius:20px;
-    padding:20px;
-}
-
-.modal-content h2{
+header h1{
+    font-size:28px;
     margin-bottom:15px;
 }
 
-.modal-content input,
-.modal-content select{
-    width:100%;
-    padding:12px;
-    margin-bottom:10px;
-
-    border:none;
-    border-radius:12px;
-
-    background:#0f172a;
-    color:white;
+.balance{
+    background:rgba(255,255,255,0.1);
+    padding:15px;
+    border-radius:15px;
 }
 
-.modal-content button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
+.balance h2{
+    font-size:16px;
+    color:#dcdcdc;
+}
 
+.balance p{
+    font-size:30px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    padding:20px;
+}
+
+.actions button{
+    padding:12px;
     border:none;
     border-radius:12px;
-
-    background:#3375ff;
+    background:#1f2937;
     color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
 
+.actions button:hover{
+    background:#2563eb;
+}
+
+.tokens{
+    padding:20px;
+}
+
+.tokens h2{
+    margin-bottom:15px;
+}
+
+.token{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#151c2c;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.token:hover{
+    transform:translateY(-3px);
+}
+
+.token img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+}
+
+.token div{
+    flex:1;
+    margin-left:15px;
+}
+
+.token h3{
+    font-size:17px;
+}
+
+.token p{
+    color:#bcbcbc;
+    font-size:14px;
+}
+
+.positive{
+    color:#00ff88;
+    font-weight:bold;
+}
+
+.negative{
+    color:#ff3b3b;
+    font-weight:bold;
+}
+
+#market,
+#nfts,
+#sendSection,
+#receiveSection,
+#swapSection,
+#buySection{
+    padding:20px;
+}
+
+#market h2,
+#nfts h2,
+#sendSection h2,
+#receiveSection h2,
+#swapSection h2,
+#buySection h2{
+    margin-bottom:15px;
+}
+
+.nft-card{
+    background:#151c2c;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.nft-card img{
+    width:100%;
+    border-radius:12px;
+}
+
+.nft-card p{
+    margin-top:10px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:14px;
+    margin-bottom:12px;
+    border:none;
+    border-radius:12px;
+    background:#1f2937;
+    color:white;
+    font-size:15px;
+}
+
+button{
+    transition:0.3s;
+}
+
+#sendSection button,
+#receiveSection button,
+#swapSection button,
+#buySection button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    margin-top:10px;
     cursor:pointer;
 }
 
-.wallet-address{
-    word-break:break-all;
-    background:#0f172a;
-    padding:12px;
-    border-radius:12px;
+#sendSection button:hover,
+#receiveSection button:hover,
+#swapSection button:hover,
+#buySection button:hover{
+    background:#1d4ed8;
 }
-
-/* BOTTOM NAV */
 
 .bottom-nav{
     position:fixed;
     bottom:0;
     left:0;
-
     width:100%;
-
     background:#111827;
-
-    border-top:
-    1px solid #1f2937;
-
     display:flex;
     justify-content:space-around;
-
-    padding:12px 0;
+    align-items:center;
+    padding:15px 0;
+    border-top:1px solid #374151;
 }
 
-.nav-btn{
+.bottom-nav button{
     background:none;
     border:none;
-    color:#9ca3af;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:4px;
+    color:white;
+    font-size:14px;
+    cursor:pointer;
 }
 
-.nav-btn.active{
-    color:#3375ff;
+.bottom-nav button:hover{
+    color:#3b82f6;
+}
+
+::-webkit-scrollbar{
+    width:6px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#2563eb;
+    border-radius:10px;
+}
+
+@media(max-width:768px){
+
+    .actions{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .token{
+        padding:12px;
+    }
+
+    .balance p{
+        font-size:24px;
+    }
+
 }
