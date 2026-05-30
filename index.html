@@ -1,200 +1,525 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SOCOETRAP Wallet</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>SOCO Wallet</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="wallet.css">
 
-<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="app">
 
-    <!-- Header -->
-    <header>
-        <div class="wallet-name">
-            <h2>SOCOETRAP Wallet</h2>
-            <span>Multi-Crypto Wallet</span>
-        </div>
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
 
-        <div class="notif">
-            <i class="fas fa-bell"></i>
-        </div>
-    </header>
+<header class="top-header">
 
-    <!-- Solde -->
-    <section class="balance-card">
-        <p>Valeur Totale</p>
-        <h1>$12,458.67</h1>
-        <span class="profit">+4.85%</span>
-    </section>
+<div class="wallet-user">
 
-    <!-- Actions -->
-    <section class="actions">
+<div class="avatar">
+S
+</div>
 
-        <button>
-            <i class="fas fa-paper-plane"></i>
-            <span>Envoyer</span>
-        </button>
+<div>
 
-        <button>
-            <i class="fas fa-download"></i>
-            <span>Recevoir</span>
-        </button>
+<h2>SOCO Wallet</h2>
 
-        <button>
-            <i class="fas fa-right-left"></i>
-            <span>Swap</span>
-        </button>
-
-        <button>
-            <i class="fas fa-credit-card"></i>
-            <span>Acheter</span>
-        </button>
-
-    </section>
-
-    <!-- Crypto -->
-    <section class="assets">
-
-        <h3>Mes actifs</h3>
-
-        <div class="coin">
-
-            <div class="left">
-                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" width="40">
-                <div>
-                    <h4>Bitcoin</h4>
-                    <p>BTC</p>
-                </div>
-            </div>
-
-            <div class="right">
-                <h4>$108,500</h4>
-                <span class="green">+2.5%</span>
-            </div>
-
-        </div>
-
-        <div class="coin">
-
-            <div class="left">
-                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" width="40">
-                <div>
-                    <h4>Ethereum</h4>
-                    <p>ETH</p>
-                </div>
-            </div>
-
-            <div class="right">
-                <h4>$5,300</h4>
-                <span class="green">+1.7%</span>
-            </div>
-
-        </div>
-
-        <div class="coin">
-
-            <div class="left">
-                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" width="40">
-                <div>
-                    <h4>BNB</h4>
-                    <p>BNB</p>
-                </div>
-            </div>
-
-            <div class="right">
-                <h4>$950</h4>
-                <span class="green">+0.8%</span>
-            </div>
-
-        </div>
-
-        <div class="coin">
-
-            <div class="left">
-                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" width="40">
-                <div>
-                    <h4>Tether</h4>
-                    <p>USDT</p>
-                </div>
-            </div>
-
-            <div class="right">
-                <h4>$1.00</h4>
-                <span class="green">+0.01%</span>
-            </div>
-
-        </div>
-
-        <div class="coin">
-
-            <div class="left">
-                <img src="https://minepi.com/favicon.ico" width="40">
-                <div>
-                    <h4>Pi Network</h4>
-                    <p>PI</p>
-                </div>
-            </div>
-
-            <div class="right">
-                <h4>$0.00</h4>
-                <span class="red">-0.5%</span>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Graphique -->
-    <section class="chart">
-
-        <h3>Performance du marché</h3>
-
-        <canvas id="marketChart"></canvas>
-
-    </section>
-
-    <!-- Navigation -->
-    <nav>
-
-        <a class="active">
-            <i class="fas fa-wallet"></i>
-            <span>Accueil</span>
-        </a>
-
-        <a>
-            <i class="fas fa-chart-line"></i>
-            <span>Marché</span>
-        </a>
-
-        <a>
-            <i class="fas fa-right-left"></i>
-            <span>Swap</span>
-        </a>
-
-        <a>
-            <i class="fas fa-clock-rotate-left"></i>
-            <span>Historique</span>
-        </a>
-
-        <a>
-            <i class="fas fa-gear"></i>
-            <span>Paramètres</span>
-        </a>
-
-    </nav>
+<span>
+Portefeuille Principal
+</span>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="app.js"></script>
+</div>
+
+<button class="notification-btn">
+🔔
+</button>
+
+</header>
+
+
+<!-- ========================= -->
+<!-- PAGE ACCUEIL -->
+<!-- ========================= -->
+
+<section
+id="homePage"
+class="page active">
+
+<div class="balance-card">
+
+<p class="balance-label">
+Valeur Totale
+</p>
+
+<h1 id="balance">
+$24,580.00
+</h1>
+
+<div class="market-indicator">
+
+<span id="marketStatus">
+Chargement...
+</span>
+
+</div>
+
+</div>
+
+
+<div class="quick-actions">
+
+<button
+class="action-item"
+onclick="openModal('sendModal')">
+
+📤
+
+<span>
+Envoyer
+</span>
+
+</button>
+
+
+<button
+class="action-item"
+onclick="openModal('receiveModal')">
+
+📥
+
+<span>
+Recevoir
+</span>
+
+</button>
+
+
+<button
+class="action-item"
+onclick="openModal('buyModal')">
+
+💳
+
+<span>
+Acheter
+</span>
+
+</button>
+
+
+<button
+class="action-item"
+onclick="showPage('swapPage')">
+
+🔄
+
+<span>
+Swap
+</span>
+
+</button>
+
+</div>
+
+
+<div class="tabs">
+
+<button class="tab active">
+Tokens
+</button>
+
+<button class="tab">
+NFTs
+</button>
+
+</div>
+
+
+<div class="token-list">
+
+<div class="token-card">
+
+<div class="token-left">
+
+<div class="coin-logo btc">
+₿
+</div>
+
+<div>
+
+<strong>
+Bitcoin
+</strong>
+
+<p>
+BTC
+</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<strong id="btcPrice">
+...
+</strong>
+
+<p id="btcChange">
+...
+</p>
+
+</div>
+
+</div>
+
+
+<div class="token-card">
+
+<div class="token-left">
+
+<div class="coin-logo eth">
+Ξ
+</div>
+
+<div>
+
+<strong>
+Ethereum
+</strong>
+
+<p>
+ETH
+</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<strong id="ethPrice">
+...
+</strong>
+
+<p id="ethChange">
+...
+</p>
+
+</div>
+
+</div>
+
+
+<div class="token-card">
+
+<div class="token-left">
+
+<div class="coin-logo bnb">
+◆
+</div>
+
+<div>
+
+<strong>
+BNB
+</strong>
+
+<p>
+BNB
+</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<strong id="bnbPrice">
+...
+</strong>
+
+<p id="bnbChange">
+...
+</p>
+
+</div>
+
+</div>
+
+
+<div class="token-card">
+
+<div class="token-left">
+
+<div class="coin-logo usdt">
+₮
+</div>
+
+<div>
+
+<strong>
+Tether
+</strong>
+
+<p>
+USDT
+</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<strong id="usdtPrice">
+...
+</strong>
+
+<p>
+Stablecoin
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- PAGE MARCHE -->
+<!-- ========================= -->
+
+<section
+id="marketPage"
+class="page">
+
+<h2>
+Marché Crypto
+</h2>
+
+<div class="market-box">
+
+<p>
+Prix crypto en temps réel
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- PAGE SWAP -->
+<!-- ========================= -->
+
+<section
+id="swapPage"
+class="page">
+
+<h2>
+Swap Crypto
+</h2>
+
+<select id="fromCoin">
+
+<option>
+BTC
+</option>
+
+<option>
+ETH
+</option>
+
+<option>
+BNB
+</option>
+
+<option>
+USDT
+</option>
+
+</select>
+
+
+<select id="toCoin">
+
+<option>
+USDT
+</option>
+
+<option>
+BTC
+</option>
+
+<option>
+ETH
+</option>
+
+<option>
+BNB
+</option>
+
+</select>
+
+
+<input
+type="number"
+id="swapAmount"
+placeholder="Montant"
+onkeyup="calculateSwap()">
+
+
+<p id="swapResult">
+Vous recevrez...
+</p>
+
+
+<button
+class="swap-btn"
+onclick="swapCrypto()">
+
+Effectuer le Swap
+
+</button>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- PAGE HISTORIQUE -->
+<!-- ========================= -->
+
+<section
+id="historyPage"
+class="page">
+
+<h2>
+Historique
+</h2>
+
+<div class="history-box">
+
+<p>
+Aucune transaction.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- PAGE PARAMETRES -->
+<!-- ========================= -->
+
+<section
+id="settingsPage"
+class="page">
+
+<h2>
+Paramètres
+</h2>
+
+<div class="settings-box">
+
+<p>
+Version 1.0
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- NAVIGATION BAS -->
+<!-- ========================= -->
+
+<nav class="bottom-nav">
+
+<button
+class="nav-btn active"
+onclick="showPage('homePage')">
+
+🏠
+
+<span>
+Accueil
+</span>
+
+</button>
+
+
+<button
+class="nav-btn"
+onclick="showPage('marketPage')">
+
+📈
+
+<span>
+Marché
+</span>
+
+</button>
+
+
+<button
+class="nav-btn"
+onclick="showPage('swapPage')">
+
+🔄
+
+<span>
+Swap
+</span>
+
+</button>
+
+
+<button
+class="nav-btn"
+onclick="showPage('historyPage')">
+
+🕒
+
+<span>
+Historique
+</span>
+
+</button>
+
+
+<button
+class="nav-btn"
+onclick="showPage('settingsPage')">
+
+⚙️
+
+<span>
+Paramètres
+</span>
+
+</button>
+
+</nav>
+
+</div>
+
+<script src="wallet.js"></script>
 
 </body>
 </html>
