@@ -1,311 +1,239 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+// ==========================
+// SOCOETRAP WALLET
+// ==========================
+
+// Ouvrir les détails d'un token
+
+const tokenCards = document.querySelectorAll(".token-card");
+const tokenDetails = document.getElementById("tokenDetails");
+const closeDetails = document.getElementById("closeDetails");
+
+tokenCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+        const name =
+            card.querySelector("h3").innerText;
+
+        tokenDetails.classList.add("active");
+
+        document.querySelector(
+            ".details-header h2"
+        ).innerText = name;
+
+    });
+
+});
+
+// Fermer
+
+closeDetails.addEventListener("click", () => {
+
+    tokenDetails.classList.remove("active");
+
+});
+
+// ==========================
+// Navigation active
+// ==========================
+
+const navItems =
+document.querySelectorAll(".nav-item");
+
+navItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        navItems.forEach(nav => {
+
+            nav.classList.remove("active");
+
+        });
+
+        item.classList.add("active");
+
+    });
+
+});
+
+// ==========================
+// Variations du marché
+// ==========================
+
+function updateMarket() {
+
+    const changes =
+    document.querySelectorAll(
+        ".token-right p"
+    );
+
+    changes.forEach(change => {
+
+        const value =
+        (Math.random() * 12 - 6)
+        .toFixed(2);
+
+        if(value >= 0){
+
+            change.className =
+            "positive";
+
+            change.innerHTML =
+            "+" + value + "%";
+
+        }else{
+
+            change.className =
+            "negative";
+
+            change.innerHTML =
+            value + "%";
+
+        }
+
+    });
+
 }
 
-body{
-    background:#0d1117;
-    color:#fff;
-    min-height:100vh;
-    padding-bottom:90px;
+updateMarket();
+
+setInterval(updateMarket, 5000);
+
+// ==========================
+// Solde simulé
+// ==========================
+
+let balance = 15240.35;
+
+function updateBalance(){
+
+    document.getElementById(
+        "totalBalance"
+    ).innerHTML =
+    "$" +
+    balance.toLocaleString();
+
 }
 
-.wallet-container{
-    width:100%;
-    max-width:500px;
-    margin:auto;
-    padding:20px;
-}
+updateBalance();
 
-/* Header */
+// ==========================
+// Graphique Canvas
+// ==========================
 
-header{
-    text-align:center;
-    margin-bottom:20px;
-}
+const canvas =
+document.getElementById("chart");
 
-header h1{
-    font-size:28px;
-    font-weight:bold;
-}
+if(canvas){
 
-header p{
-    color:#a0a0a0;
-    margin-top:5px;
-}
+    const ctx =
+    canvas.getContext("2d");
 
-/* Balance */
+    canvas.width =
+    canvas.parentElement.clientWidth - 20;
 
-.balance-card{
-    background:linear-gradient(135deg,#0066ff,#00aaff);
-    border-radius:20px;
-    padding:25px;
-    text-align:center;
-    margin-bottom:25px;
-    box-shadow:0 10px 20px rgba(0,0,0,.3);
-}
+    canvas.height = 220;
 
-.balance-card h2{
-    font-size:18px;
-    margin-bottom:10px;
-}
+    function drawChart(){
 
-.balance-card h1{
-    font-size:38px;
-    margin-bottom:8px;
-}
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
 
-.balance-card p{
-    opacity:.9;
-}
+        let points = [];
 
-/* Actions */
+        for(let i=0;i<25;i++){
 
-.actions{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:25px;
-}
+            points.push(
+                Math.random()*120+40
+            );
 
-.actions button{
-    border:none;
-    border-radius:15px;
-    padding:15px;
-    background:#161b22;
-    color:#fff;
-    cursor:pointer;
-    transition:.3s;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:8px;
-    font-size:14px;
-}
+        }
 
-.actions button i{
-    font-size:22px;
-}
+        ctx.beginPath();
 
-.actions button:hover{
-    background:#1f2937;
-    transform:translateY(-3px);
-}
+        ctx.moveTo(
+            0,
+            points[0]
+        );
 
-/* Crypto List */
+        for(let i=1;i<points.length;i++){
 
-.crypto-list{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
+            ctx.lineTo(
+                i *
+                (canvas.width / 24),
+                points[i]
+            );
 
-.crypto-card{
-    background:#161b22;
-    border-radius:18px;
-    padding:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+        }
 
-.crypto-card img{
-    width:45px;
-    height:45px;
-    border-radius:50%;
-}
+        ctx.strokeStyle =
+        "#3375ff";
 
-.crypto-card div{
-    display:flex;
-    flex-direction:column;
-}
+        ctx.lineWidth = 4;
 
-.crypto-card h3{
-    font-size:16px;
-}
+        ctx.stroke();
 
-.crypto-card p{
-    color:#9ca3af;
-    font-size:13px;
-}
-
-.price{
-    text-align:right;
-}
-
-.up{
-    color:#00ff88;
-    font-weight:bold;
-}
-
-.down{
-    color:#ff4d4d;
-    font-weight:bold;
-}
-
-/* Modal */
-
-.modal{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.8);
-    justify-content:center;
-    align-items:center;
-    z-index:1000;
-}
-
-.modal-content{
-    background:#161b22;
-    width:90%;
-    max-width:400px;
-    border-radius:20px;
-    padding:25px;
-}
-
-.modal-content h2{
-    margin-bottom:20px;
-    text-align:center;
-}
-
-.modal-content input{
-    width:100%;
-    padding:14px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:12px;
-    background:#222;
-    color:white;
-    outline:none;
-}
-
-.modal-content button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#0066ff;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* Wallet Address */
-
-.wallet-address{
-    background:#222;
-    padding:12px;
-    border-radius:12px;
-    word-break:break-all;
-    margin-bottom:15px;
-    text-align:center;
-}
-
-/* Chart */
-
-.chart-section{
-    margin-top:25px;
-    background:#161b22;
-    padding:20px;
-    border-radius:20px;
-}
-
-.chart-section h2{
-    margin-bottom:15px;
-}
-
-canvas{
-    width:100%;
-    height:250px;
-}
-
-/* History */
-
-.history{
-    margin-top:25px;
-    background:#161b22;
-    border-radius:20px;
-    padding:20px;
-}
-
-.history h2{
-    margin-bottom:15px;
-}
-
-.tx{
-    display:flex;
-    justify-content:space-between;
-    padding:12px 0;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.tx:last-child{
-    border-bottom:none;
-}
-
-.success{
-    color:#00ff88;
-    font-weight:bold;
-}
-
-.danger{
-    color:#ff4d4d;
-    font-weight:bold;
-}
-
-/* Bottom Navigation */
-
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:#161b22;
-    display:flex;
-    justify-content:space-around;
-    padding:12px 0;
-    border-top:1px solid rgba(255,255,255,.08);
-}
-
-.bottom-nav button{
-    background:none;
-    border:none;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:5px;
-    cursor:pointer;
-    font-size:13px;
-}
-
-.bottom-nav button i{
-    font-size:22px;
-}
-
-.bottom-nav button:hover{
-    color:#00aaff;
-}
-
-/* Responsive */
-
-@media(max-width:480px){
-
-    .actions{
-        grid-template-columns:repeat(2,1fr);
     }
 
-    .balance-card h1{
-        font-size:30px;
-    }
+    drawChart();
 
-    .crypto-card{
-        flex-wrap:wrap;
-        gap:10px;
-    }
+    setInterval(
+        drawChart,
+        4000
+    );
+
 }
+
+// ==========================
+// Boutons actions
+// ==========================
+
+const actions =
+document.querySelectorAll(
+    ".action-btn"
+);
+
+actions.forEach(btn => {
+
+    btn.addEventListener(
+        "click",
+        () => {
+
+        const action =
+        btn.innerText.trim();
+
+        alert(
+            action +
+            " bientôt disponible"
+        );
+
+    });
+
+});
+
+// ==========================
+// Animation d'entrée
+// ==========================
+
+window.addEventListener(
+    "load",
+    () => {
+
+    document.body.style.opacity =
+    "0";
+
+    setTimeout(() => {
+
+        document.body.style.transition =
+        "0.5s";
+
+        document.body.style.opacity =
+        "1";
+
+    },100);
+
+});
