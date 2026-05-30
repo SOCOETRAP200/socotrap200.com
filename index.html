@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,140 +9,89 @@
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="wallet.css">
 
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.1/dist/ethers.umd.min.js"></script>
+
 </head>
 
 <body>
 
 <div class="app">
 
-<!-- ========================= -->
-<!-- HEADER -->
-<!-- ========================= -->
-
 <header class="top-header">
 
 <div class="wallet-user">
 
-<div class="avatar">
-S
-</div>
+<div class="avatar">S</div>
 
 <div>
-
 <h2>SOCO Wallet</h2>
-
-<span>
-Portefeuille Principal
-</span>
-
+<span>Portefeuille Principal</span>
 </div>
 
 </div>
 
-<button class="notification-btn">
-🔔
-</button>
+<button class="notification-btn">🔔</button>
 
 </header>
 
-
-<!-- ========================= -->
-<!-- PAGE ACCUEIL -->
-<!-- ========================= -->
-
-<section
-id="homePage"
-class="page active">
+<section id="homePage" class="page active">
 
 <div class="balance-card">
 
-<p class="balance-label">
-Valeur Totale
-</p>
+<p class="balance-label">Valeur Totale</p>
 
-<h1 id="balance">
-$24,580.00
-</h1>
+<h1 id="balance">$24,580.00</h1>
 
 <div class="market-indicator">
-
-<span id="marketStatus">
-Chargement...
-</span>
-
+<span id="marketStatus">Chargement...</span>
 </div>
 
 </div>
 
+<div class="wallet-connect-card">
+
+<button
+class="connect-btn"
+onclick="connectWallet()">
+
+Connecter MetaMask
+
+</button>
+
+<p id="walletAddress">
+Non connecté
+</p>
+
+<p id="walletBalance">
+0 ETH
+</p>
+
+</div>
 
 <div class="quick-actions">
 
-<button
-class="action-item"
-onclick="openModal('sendModal')">
-
+<button class="action-item">
 📤
-
-<span>
-Envoyer
-</span>
-
+<span>Envoyer</span>
 </button>
 
-
-<button
-class="action-item"
-onclick="openModal('receiveModal')">
-
+<button class="action-item">
 📥
-
-<span>
-Recevoir
-</span>
-
+<span>Recevoir</span>
 </button>
 
-
-<button
-class="action-item"
-onclick="openModal('buyModal')">
-
+<button class="action-item">
 💳
-
-<span>
-Acheter
-</span>
-
+<span>Acheter</span>
 </button>
 
-
-<button
-class="action-item"
+<button class="action-item"
 onclick="showPage('swapPage')">
-
 🔄
-
-<span>
-Swap
-</span>
-
+<span>Swap</span>
 </button>
 
 </div>
-
-
-<div class="tabs">
-
-<button class="tab active">
-Tokens
-</button>
-
-<button class="tab">
-NFTs
-</button>
-
-</div>
-
 
 <div class="token-list">
 
@@ -151,144 +99,89 @@ NFTs
 
 <div class="token-left">
 
-<div class="coin-logo btc">
-₿
-</div>
+<div class="coin-logo btc">₿</div>
 
 <div>
-
-<strong>
-Bitcoin
-</strong>
-
-<p>
-BTC
-</p>
-
+<strong>Bitcoin</strong>
+<p>BTC</p>
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="btcPrice">
-...
-</strong>
+<strong id="btcPrice">...</strong>
 
-<p id="btcChange">
-...
-</p>
+<p id="btcChange">...</p>
 
 </div>
 
 </div>
-
 
 <div class="token-card">
 
 <div class="token-left">
 
-<div class="coin-logo eth">
-Ξ
-</div>
+<div class="coin-logo eth">Ξ</div>
 
 <div>
-
-<strong>
-Ethereum
-</strong>
-
-<p>
-ETH
-</p>
-
+<strong>Ethereum</strong>
+<p>ETH</p>
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="ethPrice">
-...
-</strong>
+<strong id="ethPrice">...</strong>
 
-<p id="ethChange">
-...
-</p>
+<p id="ethChange">...</p>
 
 </div>
 
 </div>
-
 
 <div class="token-card">
 
 <div class="token-left">
 
-<div class="coin-logo bnb">
-◆
-</div>
+<div class="coin-logo bnb">◆</div>
 
 <div>
-
-<strong>
-BNB
-</strong>
-
-<p>
-BNB
-</p>
-
+<strong>BNB</strong>
+<p>BNB</p>
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="bnbPrice">
-...
-</strong>
+<strong id="bnbPrice">...</strong>
 
-<p id="bnbChange">
-...
-</p>
+<p id="bnbChange">...</p>
 
 </div>
 
 </div>
-
 
 <div class="token-card">
 
 <div class="token-left">
 
-<div class="coin-logo usdt">
-₮
-</div>
+<div class="coin-logo usdt">₮</div>
 
 <div>
-
-<strong>
-Tether
-</strong>
-
-<p>
-USDT
-</p>
-
+<strong>Tether</strong>
+<p>USDT</p>
 </div>
 
 </div>
 
 <div class="token-right">
 
-<strong id="usdtPrice">
-...
-</strong>
+<strong id="usdtPrice">...</strong>
 
-<p>
-Stablecoin
-</p>
+<p>Stablecoin</p>
 
 </div>
 
@@ -298,95 +191,43 @@ Stablecoin
 
 </section>
 
+<section id="marketPage" class="page">
 
-<!-- ========================= -->
-<!-- PAGE MARCHE -->
-<!-- ========================= -->
-
-<section
-id="marketPage"
-class="page">
-
-<h2>
-Marché Crypto
-</h2>
+<h2>Marché</h2>
 
 <div class="market-box">
-
-<p>
-Prix crypto en temps réel
-</p>
-
+Prix en temps réel
 </div>
 
 </section>
 
+<section id="swapPage" class="page">
 
-<!-- ========================= -->
-<!-- PAGE SWAP -->
-<!-- ========================= -->
-
-<section
-id="swapPage"
-class="page">
-
-<h2>
-Swap Crypto
-</h2>
+<h2>Swap</h2>
 
 <select id="fromCoin">
-
-<option>
-BTC
-</option>
-
-<option>
-ETH
-</option>
-
-<option>
-BNB
-</option>
-
-<option>
-USDT
-</option>
-
+<option>BTC</option>
+<option>ETH</option>
+<option>BNB</option>
+<option>USDT</option>
 </select>
-
 
 <select id="toCoin">
-
-<option>
-USDT
-</option>
-
-<option>
-BTC
-</option>
-
-<option>
-ETH
-</option>
-
-<option>
-BNB
-</option>
-
+<option>USDT</option>
+<option>BTC</option>
+<option>ETH</option>
+<option>BNB</option>
 </select>
 
-
 <input
-type="number"
 id="swapAmount"
+type="number"
 placeholder="Montant"
 onkeyup="calculateSwap()">
-
 
 <p id="swapResult">
 Vous recevrez...
 </p>
-
 
 <button
 class="swap-btn"
@@ -398,120 +239,74 @@ Effectuer le Swap
 
 </section>
 
+<section id="historyPage" class="page">
 
-<!-- ========================= -->
-<!-- PAGE HISTORIQUE -->
-<!-- ========================= -->
-
-<section
-id="historyPage"
-class="page">
-
-<h2>
-Historique
-</h2>
+<h2>Historique</h2>
 
 <div class="history-box">
 
-<p>
 Aucune transaction.
-</p>
 
 </div>
 
 </section>
 
+<section id="settingsPage" class="page">
 
-<!-- ========================= -->
-<!-- PAGE PARAMETRES -->
-<!-- ========================= -->
-
-<section
-id="settingsPage"
-class="page">
-
-<h2>
-Paramètres
-</h2>
+<h2>Paramètres</h2>
 
 <div class="settings-box">
 
-<p>
 Version 1.0
-</p>
 
 </div>
 
 </section>
-
-
-<!-- ========================= -->
-<!-- NAVIGATION BAS -->
-<!-- ========================= -->
 
 <nav class="bottom-nav">
 
 <button
-class="nav-btn active"
+class="nav-btn"
 onclick="showPage('homePage')">
 
 🏠
-
-<span>
-Accueil
-</span>
+<span>Accueil</span>
 
 </button>
-
 
 <button
 class="nav-btn"
 onclick="showPage('marketPage')">
 
 📈
-
-<span>
-Marché
-</span>
+<span>Marché</span>
 
 </button>
-
 
 <button
 class="nav-btn"
 onclick="showPage('swapPage')">
 
 🔄
-
-<span>
-Swap
-</span>
+<span>Swap</span>
 
 </button>
-
 
 <button
 class="nav-btn"
 onclick="showPage('historyPage')">
 
 🕒
-
-<span>
-Historique
-</span>
+<span>Historique</span>
 
 </button>
-
 
 <button
 class="nav-btn"
 onclick="showPage('settingsPage')">
 
 ⚙️
-
-<span>
-Paramètres
-</span>
+<span>Paramètres</span>
 
 </button>
 
