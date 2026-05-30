@@ -1,209 +1,242 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
-body {
-  background: #0b1220;
-  color: white;
+body{
+    background:#0b1220;
+    color:white;
 }
 
-.app {
-  max-width: 430px;
-  margin: auto;
-  min-height: 100vh;
-  padding: 20px;
-  padding-bottom: 120px;
+.app{
+    max-width:430px;
+    margin:auto;
+    padding:20px;
+    padding-bottom:100px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
 }
 
-.header h2 {
-  font-size: 28px;
+.header h1{
+    font-size:28px;
 }
 
-.header p {
-  color: #9ca3af;
+.header p{
+    color:#9ca3af;
 }
 
-.profile img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.avatar{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:20px;
 }
 
-.wallet-card {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  border-radius: 25px;
-  padding: 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+.wallet-card{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
-.balance-title {
-  font-size: 15px;
-  opacity: 0.9;
+.balance-label{
+    opacity:.8;
+    margin-bottom:10px;
 }
 
-#walletBalance {
-  font-size: 38px;
+#balance{
+    font-size:38px;
+    margin-bottom:15px;
 }
 
-#balance {
-  font-size: 40px;
-  margin-top: 10px;
+.market-status{
+    margin-bottom:20px;
 }
 
-.market {
-  margin-top: 10px;
+#marketStatus{
+    background:rgba(255,255,255,.2);
+    padding:8px 14px;
+    border-radius:20px;
 }
 
-#marketStatus {
-  background: rgba(255,255,255,0.2);
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-size: 14px;
+.actions{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+.action-btn{
+    flex:1;
+    border:none;
+    border-radius:15px;
+    background:white;
+    color:#111827;
+    padding:12px;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    align-items:center;
+    font-weight:bold;
 }
 
-.action-btn {
-  text-align: center;
+.market-section{
+    margin-top:25px;
+    background:#111827;
+    border-radius:20px;
+    padding:20px;
 }
 
-.circle {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin: auto;
-  margin-bottom: 8px;
+.market-section h2{
+    margin-bottom:15px;
 }
 
-.blue {
-  background: #3b82f6;
+.coin{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #1f2937;
 }
 
-.green {
-  background: #10b981;
+.coin:last-child{
+    border-bottom:none;
 }
 
-.orange {
-  background: #f59e0b;
+.coin p{
+    color:#9ca3af;
+    font-size:13px;
 }
 
-.red {
-  background: #ef4444;
+.price{
+    font-weight:bold;
 }
 
-.section-title {
-  font-size: 22px;
-  margin-top: 30px;
-  margin-bottom: 15px;
+.swap-section{
+    margin-top:25px;
+    background:#111827;
+    border-radius:20px;
+    padding:20px;
 }
 
-.token-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.swap-section h2{
+    margin-bottom:15px;
 }
 
-.token {
-  background: #111827;
-  padding: 18px;
-  border-radius: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.swap-section select,
+.swap-section input{
+    width:100%;
+    margin-bottom:12px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#1f2937;
+    color:white;
 }
 
-.token-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.swap-btn{
+    width:100%;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.token-left img {
-  width: 45px;
-  height: 45px;
+.transactions{
+    margin-top:25px;
+    background:#111827;
+    border-radius:20px;
+    padding:20px;
 }
 
-.token-left span {
-  color: #9ca3af;
+.transactions h2{
+    margin-bottom:15px;
 }
 
-.token-right {
-  text-align: right;
+.tx{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #1f2937;
 }
 
-.positive {
-  color: #22c55e;
+.tx:last-child{
+    border-bottom:none;
 }
 
-.negative {
-  color: #ef4444;
+.positive{
+    color:#22c55e;
 }
 
-.transactions {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.negative{
+    color:#ef4444;
 }
 
-.transaction {
-  background: #111827;
-  padding: 18px;
-  border-radius: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.modal{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.7);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
 }
 
-.transaction span {
-  color: #9ca3af;
-  font-size: 14px;
+.modal-content{
+    background:#111827;
+    width:90%;
+    max-width:400px;
+    border-radius:20px;
+    padding:20px;
 }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #111827;
-  display: flex;
-  justify-content: space-around;
-  padding: 15px 0;
-  border-top: 1px solid #1f2937;
+.modal-content h2{
+    margin-bottom:15px;
 }
 
-.nav-item {
-  text-align: center;
-  color: #9ca3af;
+.modal-content input{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border:none;
+    border-radius:10px;
+    background:#1f2937;
+    color:white;
 }
 
-.nav-item span {
-  font-size: 22px;
+.modal-content button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
 }
 
-.nav-item p {
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.active {
-  color: #3b82f6;
+.wallet-address{
+    word-break:break-all;
+    background:#1f2937;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
 }
