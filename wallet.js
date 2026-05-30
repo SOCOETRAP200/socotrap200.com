@@ -1,239 +1,375 @@
-// ==========================
-// SOCOETRAP WALLET
-// ==========================
+// ===============================
+// NAVIGATION ENTRE LES PAGES
+// ===============================
 
-// Ouvrir les détails d'un token
+function showPage(pageId) {
 
-const tokenCards = document.querySelectorAll(".token-card");
-const tokenDetails = document.getElementById("tokenDetails");
-const closeDetails = document.getElementById("closeDetails");
+    document
+    .querySelectorAll(".page")
+    .forEach(page => {
 
-tokenCards.forEach(card => {
-
-    card.addEventListener("click", () => {
-
-        const name =
-            card.querySelector("h3").innerText;
-
-        tokenDetails.classList.add("active");
-
-        document.querySelector(
-            ".details-header h2"
-        ).innerText = name;
+        page.classList.remove("active");
 
     });
 
-});
+    document
+    .getElementById(pageId)
+    .classList.add("active");
 
-// Fermer
+    document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn => {
 
-closeDetails.addEventListener("click", () => {
-
-    tokenDetails.classList.remove("active");
-
-});
-
-// ==========================
-// Navigation active
-// ==========================
-
-const navItems =
-document.querySelectorAll(".nav-item");
-
-navItems.forEach(item => {
-
-    item.addEventListener("click", () => {
-
-        navItems.forEach(nav => {
-
-            nav.classList.remove("active");
-
-        });
-
-        item.classList.add("active");
+        btn.classList.remove("active");
 
     });
 
-});
+}
 
-// ==========================
-// Variations du marché
-// ==========================
+// ===============================
+// MODALES
+// ===============================
 
-function updateMarket() {
+function openModal(id){
 
-    const changes =
-    document.querySelectorAll(
-        ".token-right p"
-    );
+    const modal =
+    document.getElementById(id);
 
-    changes.forEach(change => {
+    if(modal){
 
-        const value =
-        (Math.random() * 12 - 6)
-        .toFixed(2);
+        modal.style.display = "flex";
 
-        if(value >= 0){
+    }
 
-            change.className =
-            "positive";
+}
 
-            change.innerHTML =
-            "+" + value + "%";
+function closeModal(id){
 
-        }else{
+    const modal =
+    document.getElementById(id);
 
-            change.className =
-            "negative";
+    if(modal){
 
-            change.innerHTML =
-            value + "%";
+        modal.style.display = "none";
 
-        }
+    }
 
-    });
+}
+
+// ===============================
+// PRIX CRYPTO EN TEMPS RÉEL
+// ===============================
+
+let btcPrice = 0;
+let ethPrice = 0;
+let bnbPrice = 0;
+let usdtPrice = 1;
+
+async function updateMarket(){
+
+    try{
+
+        const response =
+        await fetch(
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,tether&vs_currencies=usd&include_24hr_change=true"
+        );
+
+        const data =
+        await response.json();
+
+        btcPrice =
+        data.bitcoin.usd;
+
+        ethPrice =
+        data.ethereum.usd;
+
+        bnbPrice =
+        data.binancecoin.usd;
+
+        usdtPrice =
+        data.tether.usd;
+
+        document.getElementById(
+        "btcPrice").innerHTML =
+        "$" +
+        btcPrice.toLocaleString();
+
+        document.getElementById(
+        "ethPrice").innerHTML =
+        "$" +
+        ethPrice.toLocaleString();
+
+        document.getElementById(
+        "bnbPrice").innerHTML =
+        "$" +
+        bnbPrice.toLocaleString();
+
+        document.getElementById(
+        "usdtPrice").innerHTML =
+        "$" +
+        usdtPrice;
+
+        document.getElementById(
+        "btcChange").innerHTML =
+        data.bitcoin
+        .usd_24h_change
+        .toFixed(2) + "%";
+
+        document.getElementById(
+        "ethChange").innerHTML =
+        data.ethereum
+        .usd_24h_change
+        .toFixed(2) + "%";
+
+        document.getElementById(
+        "bnbChange").innerHTML =
+        data.binancecoin
+        .usd_24h_change
+        .toFixed(2) + "%";
+
+        const marketStatus =
+        document.getElementById(
+        "marketStatus");
+
+        marketStatus.innerHTML =
+        "BTC $" +
+        btcPrice.toLocaleString();
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        document.getElementById(
+        "marketStatus"
+        ).innerHTML =
+        "Marché indisponible";
+
+    }
 
 }
 
 updateMarket();
 
-setInterval(updateMarket, 5000);
+setInterval(
+updateMarket,
+30000
+);
 
-// ==========================
-// Solde simulé
-// ==========================
+// ===============================
+// CALCULATEUR DE SWAP
+// ===============================
 
-let balance = 15240.35;
+function calculateSwap(){
 
-function updateBalance(){
-
+    const amount =
+    parseFloat(
     document.getElementById(
-        "totalBalance"
-    ).innerHTML =
-    "$" +
-    balance.toLocaleString();
+    "swapAmount"
+    ).value
+    );
 
-}
+    const fromCoin =
+    document.getElementById(
+    "fromCoin"
+    ).value;
 
-updateBalance();
+    const toCoin =
+    document.getElementById(
+    "toCoin"
+    ).value;
 
-// ==========================
-// Graphique Canvas
-// ==========================
+    if(isNaN(amount)){
 
-const canvas =
-document.getElementById("chart");
+        document.getElementById(
+        "swapResult"
+        ).innerHTML =
+        "Vous recevrez...";
 
-if(canvas){
-
-    const ctx =
-    canvas.getContext("2d");
-
-    canvas.width =
-    canvas.parentElement.clientWidth - 20;
-
-    canvas.height = 220;
-
-    function drawChart(){
-
-        ctx.clearRect(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-        let points = [];
-
-        for(let i=0;i<25;i++){
-
-            points.push(
-                Math.random()*120+40
-            );
-
-        }
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            0,
-            points[0]
-        );
-
-        for(let i=1;i<points.length;i++){
-
-            ctx.lineTo(
-                i *
-                (canvas.width / 24),
-                points[i]
-            );
-
-        }
-
-        ctx.strokeStyle =
-        "#3375ff";
-
-        ctx.lineWidth = 4;
-
-        ctx.stroke();
+        return;
 
     }
 
-    drawChart();
+    let usdValue = 0;
 
-    setInterval(
-        drawChart,
-        4000
+    if(fromCoin === "BTC"){
+
+        usdValue =
+        amount * btcPrice;
+
+    }
+
+    if(fromCoin === "ETH"){
+
+        usdValue =
+        amount * ethPrice;
+
+    }
+
+    if(fromCoin === "BNB"){
+
+        usdValue =
+        amount * bnbPrice;
+
+    }
+
+    if(fromCoin === "USDT"){
+
+        usdValue =
+        amount;
+
+    }
+
+    let received = 0;
+
+    if(toCoin === "BTC"){
+
+        received =
+        usdValue / btcPrice;
+
+    }
+
+    if(toCoin === "ETH"){
+
+        received =
+        usdValue / ethPrice;
+
+    }
+
+    if(toCoin === "BNB"){
+
+        received =
+        usdValue / bnbPrice;
+
+    }
+
+    if(toCoin === "USDT"){
+
+        received =
+        usdValue;
+
+    }
+
+    document.getElementById(
+    "swapResult"
+    ).innerHTML =
+
+    "Vous recevrez environ " +
+
+    received.toFixed(6) +
+
+    " " +
+
+    toCoin;
+
+}
+
+// ===============================
+// SWAP
+// ===============================
+
+function swapCrypto(){
+
+    calculateSwap();
+
+    alert(
+    "Swap simulé avec succès."
     );
 
 }
 
-// ==========================
-// Boutons actions
-// ==========================
+// ===============================
+// ACHAT
+// ===============================
 
-const actions =
-document.querySelectorAll(
-    ".action-btn"
-);
+function buyCrypto(){
 
-actions.forEach(btn => {
+    alert(
+    "Fonction Acheter prête."
+    );
 
-    btn.addEventListener(
-        "click",
-        () => {
+}
 
-        const action =
-        btn.innerText.trim();
+// ===============================
+// ENVOYER
+// ===============================
 
-        alert(
-            action +
-            " bientôt disponible"
-        );
+function sendCrypto(){
 
-    });
+    alert(
+    "Fonction Envoyer prête."
+    );
 
-});
+}
 
-// ==========================
-// Animation d'entrée
-// ==========================
+// ===============================
+// SOLDE
+// ===============================
+
+let balance =
+24580;
+
+setInterval(() => {
+
+    const randomMove =
+    Math.floor(
+    Math.random() * 200 - 100
+    );
+
+    balance +=
+    randomMove;
+
+    if(balance < 1000){
+
+        balance =
+        1000;
+
+    }
+
+    document.getElementById(
+    "balance"
+    ).innerHTML =
+
+    "$" +
+
+    balance.toLocaleString()
+
+    + ".00";
+
+}, 5000);
+
+// ===============================
+// PWA
+// ===============================
+
+if("serviceWorker" in navigator){
 
 window.addEventListener(
-    "load",
-    () => {
 
-    document.body.style.opacity =
-    "0";
+"load",
 
-    setTimeout(() => {
+() => {
 
-        document.body.style.transition =
-        "0.5s";
+navigator.serviceWorker
+.register(
+"./service-worker.js"
+)
 
-        document.body.style.opacity =
-        "1";
+.then(() => {
 
-    },100);
+console.log(
+"Service Worker installé"
+);
+
+})
+
+.catch(error => {
+
+console.log(error);
 
 });
+
+});
+
+}
