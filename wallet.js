@@ -1,8 +1,8 @@
-// =====================================
+// ============================
 // PRIX CRYPTO EN TEMPS RÉEL
-// =====================================
+// ============================
 
-async function updatePrices() {
+async function updateMarket() {
 
     try {
 
@@ -12,28 +12,41 @@ async function updatePrices() {
 
         const data = await response.json();
 
-        document.getElementById("btcPrice").innerText =
+        // Bitcoin
+        document.getElementById("btcPrice").innerHTML =
             "$" + data.bitcoin.usd.toLocaleString();
 
-        document.getElementById("ethPrice").innerText =
+        document.getElementById("btcChange").innerHTML =
+            data.bitcoin.usd_24h_change.toFixed(2) + "%";
+
+        // Ethereum
+        document.getElementById("ethPrice").innerHTML =
             "$" + data.ethereum.usd.toLocaleString();
 
-        document.getElementById("bnbPrice").innerText =
+        document.getElementById("ethChange").innerHTML =
+            data.ethereum.usd_24h_change.toFixed(2) + "%";
+
+        // BNB
+        document.getElementById("bnbPrice").innerHTML =
             "$" + data.binancecoin.usd.toLocaleString();
 
-        document.getElementById("usdtPrice").innerText =
-            "$" + data.tether.usd.toLocaleString();
+        document.getElementById("bnbChange").innerHTML =
+            data.binancecoin.usd_24h_change.toFixed(2) + "%";
 
-        const btcChange =
+        // USDT
+        document.getElementById("usdtPrice").innerHTML =
+            "$" + data.tether.usd;
+
+        const btc24h =
             data.bitcoin.usd_24h_change.toFixed(2);
 
         const marketStatus =
             document.getElementById("marketStatus");
 
-        if (btcChange >= 0) {
+        if (btc24h >= 0) {
 
             marketStatus.innerHTML =
-                "▲ BTC +" + btcChange + "%";
+                "▲ BTC +" + btc24h + "%";
 
             marketStatus.style.color =
                 "#22c55e";
@@ -41,112 +54,77 @@ async function updatePrices() {
         } else {
 
             marketStatus.innerHTML =
-                "▼ BTC " + btcChange + "%";
+                "▼ BTC " + btc24h + "%";
 
             marketStatus.style.color =
                 "#ef4444";
-
         }
 
     } catch (error) {
 
-        console.log(
-            "Erreur API :",
-            error
-        );
+        console.log(error);
 
         document.getElementById(
             "marketStatus"
         ).innerHTML =
             "Marché indisponible";
     }
-
 }
 
-updatePrices();
+updateMarket();
 
 setInterval(
-    updatePrices,
+    updateMarket,
     30000
 );
 
 
-// =====================================
+// ============================
 // MODALES
-// =====================================
+// ============================
 
 function openModal(id) {
 
     document.getElementById(id)
         .style.display = "flex";
-
 }
 
 function closeModal(id) {
 
     document.getElementById(id)
         .style.display = "none";
-
 }
 
 
-// =====================================
+// ============================
 // ENVOYER
-// =====================================
+// ============================
 
 function sendCrypto() {
 
     alert(
-        "Transaction simulée avec succès."
+        "Fonction d'envoi prête pour intégration blockchain."
     );
 
     closeModal("sendModal");
-
 }
 
 
-// =====================================
-// RECEVOIR
-// =====================================
-
-function receiveCrypto() {
-
-    alert(
-        "Adresse copiée."
-    );
-
-}
-
-
-// =====================================
+// ============================
 // ACHETER
-// =====================================
+// ============================
 
 function buyCrypto() {
 
     alert(
-        "Fonction Acheter prête pour intégration."
+        "Acheter : à connecter à un fournisseur de paiement."
     );
-
 }
 
 
-// =====================================
-// VENDRE
-// =====================================
-
-function sellCrypto() {
-
-    alert(
-        "Fonction Vendre prête pour intégration."
-    );
-
-}
-
-
-// =====================================
+// ============================
 // SWAP
-// =====================================
+// ============================
 
 function swapCrypto() {
 
@@ -171,11 +149,10 @@ function swapCrypto() {
     ) {
 
         alert(
-            "Entre un montant valide."
+            "Entrez un montant valide."
         );
 
         return;
-
     }
 
     alert(
@@ -187,32 +164,31 @@ function swapCrypto() {
         toCoin
     );
 
+    closeModal("swapModal");
 }
 
 
-// =====================================
-// ANIMATION SOLDE
-// =====================================
+// ============================
+// SOLDE DYNAMIQUE
+// ============================
 
 let walletBalance = 24580;
 
 setInterval(() => {
 
-    const randomVariation =
+    const randomMove =
         Math.floor(
-            Math.random() * 400 - 200
+            Math.random() * 300 - 150
         );
 
     walletBalance +=
-        randomVariation;
+        randomMove;
 
     if (
         walletBalance < 1000
     ) {
 
-        walletBalance =
-            1000;
-
+        walletBalance = 1000;
     }
 
     document.getElementById(
@@ -225,9 +201,9 @@ setInterval(() => {
 }, 5000);
 
 
-// =====================================
-// FERMER MODALE EN CLIQUANT À L'EXTÉRIEUR
-// =====================================
+// ============================
+// FERMETURE MODALE
+// ============================
 
 window.onclick = function(event) {
 
@@ -244,7 +220,6 @@ window.onclick = function(event) {
 
             modal.style.display =
                 "none";
-
         }
 
     });
