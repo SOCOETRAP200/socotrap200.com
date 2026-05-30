@@ -1,131 +1,273 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOCOTRAP Wallet</title>
-    <link rel="stylesheet" href="wallet.css">
-    <script defer src="wallet.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOCOETRAP Wallet</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
 
-    <header>
-        <h1>SOCOTRAP Wallet</h1>
-        <div class="balance">
-            <h2>Solde Total</h2>
-            <p id="totalBalance">$0.00</p>
-        </div>
-    </header>
+<!-- HEADER -->
 
-    <section class="actions">
-        <button onclick="showSend()">Envoyer</button>
-        <button onclick="showReceive()">Recevoir</button>
-        <button onclick="showBuy()">Acheter</button>
-        <button onclick="showSwap()">Swap</button>
-    </section>
+<header class="header">
 
-    <section class="tokens">
-        <h2>Tokens</h2>
+<div class="top-bar">
 
-        <div class="token" onclick="openToken('BTC')">
-            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC">
-            <div>
-                <h3>Bitcoin</h3>
-                <p id="btcPrice">$0.00</p>
-            </div>
-            <span class="positive">+0.00%</span>
-        </div>
+<div class="profile">
+<div class="avatar">S</div>
+<div>
+<h3>SOCOETRAP Wallet</h3>
+<p>Multi-Crypto Wallet</p>
+</div>
+</div>
 
-        <div class="token" onclick="openToken('ETH')">
-            <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
-            <div>
-                <h3>Ethereum</h3>
-                <p id="ethPrice">$0.00</p>
-            </div>
-            <span class="negative">-0.00%</span>
-        </div>
+<div class="icons">
+<i class="fa-solid fa-bell"></i>
+<i class="fa-solid fa-gear"></i>
+</div>
 
-        <div class="token" onclick="openToken('BNB')">
-            <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB">
-            <div>
-                <h3>BNB</h3>
-                <p id="bnbPrice">$0.00</p>
-            </div>
-            <span class="positive">+0.00%</span>
-        </div>
+</div>
 
-        <div class="token" onclick="openToken('PI')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Pi_Network.svg/512px-Pi_Network.svg.png" alt="PI">
-            <div>
-                <h3>Pi Network</h3>
-                <p id="piPrice">$0.00</p>
-            </div>
-            <span class="positive">+0.00%</span>
-        </div>
-    </section>
+</header>
 
-    <section id="market">
-        <h2>Marché Crypto</h2>
-        <div id="marketData"></div>
-    </section>
+<!-- BALANCE -->
 
-    <section id="nfts">
-        <h2>NFTs</h2>
-        <div class="nft-card">
-            <img src="https://via.placeholder.com/150" alt="NFT">
-            <p>Mon NFT</p>
-        </div>
-    </section>
+<section class="balance-card">
 
-    <section id="sendSection" style="display:none;">
-        <h2>Envoyer</h2>
-        <input type="text" placeholder="Adresse du destinataire">
-        <input type="number" placeholder="Montant">
-        <button>Confirmer</button>
-        <button onclick="closeForms()">Annuler</button>
-    </section>
+<p class="label">Valeur Totale</p>
 
-    <section id="receiveSection" style="display:none;">
-        <h2>Recevoir</h2>
-        <p>Adresse :</p>
-        <input type="text" value="0x123456789abcdef" readonly>
-        <button>Copier</button>
-    </section>
+<h1 id="totalBalance">$0.00</h1>
 
-    <section id="swapSection" style="display:none;">
-        <h2>Swap</h2>
+<p class="change positive">
++0.00% Aujourd'hui
+</p>
 
-        <select>
-            <option>BTC</option>
-            <option>ETH</option>
-            <option>BNB</option>
-            <option>PI</option>
-        </select>
+</section>
 
-        <select>
-            <option>ETH</option>
-            <option>BTC</option>
-            <option>BNB</option>
-            <option>PI</option>
-        </select>
+<!-- ACTIONS -->
 
-        <button>Échanger</button>
-    </section>
+<section class="actions">
 
-    <section id="buySection" style="display:none;">
-        <h2>Acheter</h2>
+<div class="action-btn">
+<i class="fa-solid fa-paper-plane"></i>
+<span>Envoyer</span>
+</div>
 
-        <button>Payer par Carte</button>
-        <button>Payer en Crypto</button>
-    </section>
+<div class="action-btn">
+<i class="fa-solid fa-download"></i>
+<span>Recevoir</span>
+</div>
 
-    <nav class="bottom-nav">
-        <button>Accueil</button>
-        <button>Marché</button>
-        <button>Swap</button>
-        <button>NFTs</button>
-        <button>Paramètres</button>
-    </nav>
+<div class="action-btn">
+<i class="fa-solid fa-credit-card"></i>
+<span>Acheter</span>
+</div>
+
+<div class="action-btn">
+<i class="fa-solid fa-money-bill"></i>
+<span>Vendre</span>
+</div>
+
+</section>
+
+<!-- TOKENS -->
+
+<section class="tokens">
+
+<div class="section-title">
+
+<h2>Crypto</h2>
+
+<button>+ Ajouter</button>
+
+</div>
+
+<!-- BTC -->
+
+<div class="token-card">
+
+<div class="token-left">
+
+<img src="images/btc.png">
+
+<div>
+
+<h3>Bitcoin</h3>
+
+<p>0.0000 BTC</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<h3>$0.00</h3>
+
+<p class="positive">+0.00%</p>
+
+</div>
+
+</div>
+
+<!-- ETH -->
+
+<div class="token-card">
+
+<div class="token-left">
+
+<img src="images/eth.png">
+
+<div>
+
+<h3>Ethereum</h3>
+
+<p>0.0000 ETH</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<h3>$0.00</h3>
+
+<p class="negative">-0.00%</p>
+
+</div>
+
+</div>
+
+<!-- BNB -->
+
+<div class="token-card">
+
+<div class="token-left">
+
+<img src="images/bnb.png">
+
+<div>
+
+<h3>BNB</h3>
+
+<p>0.0000 BNB</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<h3>$0.00</h3>
+
+<p class="positive">+0.00%</p>
+
+</div>
+
+</div>
+
+<!-- USDT -->
+
+<div class="token-card">
+
+<div class="token-left">
+
+<img src="images/usdt.png">
+
+<div>
+
+<h3>Tether USD</h3>
+
+<p>0.00 USDT</p>
+
+</div>
+
+</div>
+
+<div class="token-right">
+
+<h3>$0.00</h3>
+
+<p class="positive">+0.00%</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DETAILS TOKEN -->
+
+<div class="token-details" id="tokenDetails">
+
+<div class="details-header">
+
+<h2>Bitcoin</h2>
+
+<span id="closeDetails">✕</span>
+
+</div>
+
+<div class="chart-box">
+
+<canvas id="chart"></canvas>
+
+</div>
+
+<div class="details-balance">
+
+<h1>$0.00</h1>
+
+<p>0.0000 BTC</p>
+
+</div>
+
+<div class="details-actions">
+
+<button>Envoyer</button>
+
+<button>Recevoir</button>
+
+<button>Swap</button>
+
+</div>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<nav class="bottom-nav">
+
+<div class="nav-item active">
+<i class="fa-solid fa-wallet"></i>
+<span>Wallet</span>
+</div>
+
+<div class="nav-item">
+<i class="fa-solid fa-chart-line"></i>
+<span>Marché</span>
+</div>
+
+<div class="nav-item">
+<i class="fa-solid fa-arrows-rotate"></i>
+<span>Swap</span>
+</div>
+
+<div class="nav-item">
+<i class="fa-solid fa-gear"></i>
+<span>Paramètres</span>
+</div>
+
+</nav>
+
+<script src="app.js"></script>
 
 </body>
 </html>
