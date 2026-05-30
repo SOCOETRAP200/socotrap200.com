@@ -6,283 +6,375 @@
 
 <title>SOCO Wallet</title>
 
-<link rel="stylesheet" href="wallet.css">
+<meta name="theme-color" content="#3375ff">
 
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="wallet.css">
 </head>
 
 <body>
 
 <div class="app">
 
-    <header class="header">
+    <!-- HEADER -->
+    <header class="top-header">
 
-        <div>
-            <h1>SOCO Wallet</h1>
-            <p>Mon portefeuille crypto</p>
+        <div class="wallet-user">
+
+            <div class="avatar">
+                S
+            </div>
+
+            <div>
+                <h2>SOCO Wallet</h2>
+                <span>Portefeuille principal</span>
+            </div>
+
         </div>
 
-        <div class="avatar">
-            G
-        </div>
+        <button class="notification-btn">
+            🔔
+        </button>
 
     </header>
 
 
-    <section class="wallet-card">
+    <!-- BALANCE CARD -->
+    <section class="balance-card">
 
         <p class="balance-label">
-            Solde Total
+            Valeur Totale
         </p>
 
-        <h2 id="balance">
+        <h1 id="balance">
             $24,580.00
-        </h2>
+        </h1>
 
-        <div class="market-status">
+        <div class="market-indicator">
             <span id="marketStatus">
                 Chargement...
             </span>
         </div>
 
-        <div class="actions">
+    </section>
 
-            <button class="action-btn" onclick="openModal('sendModal')">
-                📤
-                <span>Envoyer</span>
-            </button>
 
-            <button class="action-btn" onclick="openModal('receiveModal')">
-                📥
-                <span>Recevoir</span>
-            </button>
+    <!-- ACTIONS -->
+    <section class="quick-actions">
 
-            <button class="action-btn" onclick="openModal('buyModal')">
-                💳
-                <span>Acheter</span>
-            </button>
+        <button class="action-item" onclick="openModal('sendModal')">
+            <div class="action-icon">📤</div>
+            <span>Envoyer</span>
+        </button>
 
-            <button class="action-btn" onclick="openModal('sellModal')">
-                💰
-                <span>Vendre</span>
-            </button>
+        <button class="action-item" onclick="openModal('receiveModal')">
+            <div class="action-icon">📥</div>
+            <span>Recevoir</span>
+        </button>
+
+        <button class="action-item" onclick="openModal('buyModal')">
+            <div class="action-icon">💳</div>
+            <span>Acheter</span>
+        </button>
+
+        <button class="action-item" onclick="openModal('swapModal')">
+            <div class="action-icon">🔄</div>
+            <span>Swap</span>
+        </button>
+
+    </section>
+
+
+    <!-- TABS -->
+    <section class="tabs">
+
+        <button class="tab active">
+            Tokens
+        </button>
+
+        <button class="tab">
+            NFTs
+        </button>
+
+    </section>
+
+
+    <!-- TOKENS -->
+    <section class="token-list">
+
+        <div class="token-card">
+
+            <div class="token-left">
+                <div class="coin-logo btc">
+                    ₿
+                </div>
+
+                <div>
+                    <strong>Bitcoin</strong>
+                    <p>BTC</p>
+                </div>
+            </div>
+
+            <div class="token-right">
+                <strong id="btcPrice">...</strong>
+                <p id="btcChange">...</p>
+            </div>
+
+        </div>
+
+
+        <div class="token-card">
+
+            <div class="token-left">
+                <div class="coin-logo eth">
+                    Ξ
+                </div>
+
+                <div>
+                    <strong>Ethereum</strong>
+                    <p>ETH</p>
+                </div>
+            </div>
+
+            <div class="token-right">
+                <strong id="ethPrice">...</strong>
+                <p id="ethChange">...</p>
+            </div>
+
+        </div>
+
+
+        <div class="token-card">
+
+            <div class="token-left">
+                <div class="coin-logo bnb">
+                    ◆
+                </div>
+
+                <div>
+                    <strong>BNB</strong>
+                    <p>BNB</p>
+                </div>
+            </div>
+
+            <div class="token-right">
+                <strong id="bnbPrice">...</strong>
+                <p id="bnbChange">...</p>
+            </div>
+
+        </div>
+
+
+        <div class="token-card">
+
+            <div class="token-left">
+                <div class="coin-logo usdt">
+                    ₮
+                </div>
+
+                <div>
+                    <strong>Tether</strong>
+                    <p>USDT</p>
+                </div>
+            </div>
+
+            <div class="token-right">
+                <strong id="usdtPrice">...</strong>
+                <p>Stablecoin</p>
+            </div>
+
+        </div>
+
+
+        <div class="token-card">
+
+            <div class="token-left">
+                <div class="coin-logo pi">
+                    π
+                </div>
+
+                <div>
+                    <strong>Pi Coin</strong>
+                    <p>PI</p>
+                </div>
+            </div>
+
+            <div class="token-right">
+                <strong id="piPrice">
+                    À configurer
+                </strong>
+                <p>PI</p>
+            </div>
 
         </div>
 
     </section>
 
 
+    <!-- MARKET -->
     <section class="market-section">
 
-        <h2>Marché Crypto</h2>
+        <div class="section-header">
 
-        <div class="coin">
+            <h3>Marché</h3>
 
-            <div>
-                <strong>Bitcoin</strong>
-                <p>BTC</p>
-            </div>
-
-            <div class="price">
-                <span id="btcPrice">...</span>
-            </div>
+            <button>
+                Voir tout
+            </button>
 
         </div>
 
-        <div class="coin">
+        <div class="market-box">
 
-            <div>
-                <strong>Ethereum</strong>
-                <p>ETH</p>
-            </div>
-
-            <div class="price">
-                <span id="ethPrice">...</span>
-            </div>
-
-        </div>
-
-        <div class="coin">
-
-            <div>
-                <strong>BNB</strong>
-                <p>BNB</p>
-            </div>
-
-            <div class="price">
-                <span id="bnbPrice">...</span>
-            </div>
-
-        </div>
-
-        <div class="coin">
-
-            <div>
-                <strong>Tether</strong>
-                <p>USDT</p>
-            </div>
-
-            <div class="price">
-                <span id="usdtPrice">...</span>
-            </div>
+            <p>
+                Prix en temps réel via API.
+            </p>
 
         </div>
 
     </section>
 
 
-    <section class="swap-section">
+    <!-- SEND -->
+    <div id="sendModal" class="modal">
 
-        <h2>Swap</h2>
+        <div class="modal-content">
 
-        <select id="fromCoin">
-            <option>BTC</option>
-            <option>ETH</option>
-            <option>BNB</option>
-            <option>USDT</option>
-        </select>
+            <h2>Envoyer</h2>
 
-        <select id="toCoin">
-            <option>USDT</option>
-            <option>BNB</option>
-            <option>ETH</option>
-            <option>BTC</option>
-        </select>
+            <input
+                type="text"
+                placeholder="Adresse du portefeuille">
 
-        <input
-            type="number"
-            id="swapAmount"
-            placeholder="Montant">
+            <input
+                type="number"
+                placeholder="Montant">
 
-        <button class="swap-btn"
-            onclick="swapCrypto()">
-            Effectuer le Swap
-        </button>
+            <button onclick="sendCrypto()">
+                Confirmer
+            </button>
 
-    </section>
+            <button onclick="closeModal('sendModal')">
+                Fermer
+            </button>
 
-
-    <section class="transactions">
-
-        <h2>Transactions Récentes</h2>
-
-        <div class="tx">
-            <span>Bitcoin reçu</span>
-            <strong class="positive">
-                +0.004 BTC
-            </strong>
         </div>
 
-        <div class="tx">
-            <span>Ethereum envoyé</span>
-            <strong class="negative">
-                -0.12 ETH
-            </strong>
+    </div>
+
+
+    <!-- RECEIVE -->
+    <div id="receiveModal" class="modal">
+
+        <div class="modal-content">
+
+            <h2>Recevoir</h2>
+
+            <p class="wallet-address">
+                0x123456789ABCDEF123456789
+            </p>
+
+            <button onclick="closeModal('receiveModal')">
+                Fermer
+            </button>
+
         </div>
 
-        <div class="tx">
-            <span>USDT acheté</span>
-            <strong class="positive">
-                +250 USDT
-            </strong>
+    </div>
+
+
+    <!-- BUY -->
+    <div id="buyModal" class="modal">
+
+        <div class="modal-content">
+
+            <h2>Acheter</h2>
+
+            <p>
+                Intégration future.
+            </p>
+
+            <button onclick="buyCrypto()">
+                Continuer
+            </button>
+
+            <button onclick="closeModal('buyModal')">
+                Fermer
+            </button>
+
         </div>
 
-    </section>
-
-</div>
+    </div>
 
 
-<div id="sendModal" class="modal">
+    <!-- SWAP -->
+    <div id="swapModal" class="modal">
 
-    <div class="modal-content">
+        <div class="modal-content">
 
-        <h2>Envoyer</h2>
+            <h2>Swap</h2>
 
-        <input
-            type="text"
-            placeholder="Adresse du wallet">
+            <select id="fromCoin">
+                <option>BTC</option>
+                <option>ETH</option>
+                <option>BNB</option>
+                <option>USDT</option>
+            </select>
 
-        <input
-            type="number"
-            placeholder="Montant">
+            <select id="toCoin">
+                <option>USDT</option>
+                <option>BNB</option>
+                <option>ETH</option>
+                <option>BTC</option>
+            </select>
 
-        <button onclick="sendCrypto()">
-            Confirmer
-        </button>
+            <input
+                id="swapAmount"
+                type="number"
+                placeholder="Montant">
 
-        <button onclick="closeModal('sendModal')">
-            Fermer
-        </button>
+            <button onclick="swapCrypto()">
+                Effectuer le Swap
+            </button>
+
+            <button onclick="closeModal('swapModal')">
+                Fermer
+            </button>
+
+        </div>
 
     </div>
 
-</div>
 
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
 
-<div id="receiveModal" class="modal">
-
-    <div class="modal-content">
-
-        <h2>Recevoir</h2>
-
-        <p>
-            Adresse Wallet :
-        </p>
-
-        <p class="wallet-address">
-            0x123456789ABCDEF987654321
-        </p>
-
-        <button onclick="closeModal('receiveModal')">
-            Fermer
+        <button class="nav-btn active">
+            🏠
+            <span>Accueil</span>
         </button>
 
-    </div>
-
-</div>
-
-
-<div id="buyModal" class="modal">
-
-    <div class="modal-content">
-
-        <h2>Acheter Crypto</h2>
-
-        <p>
-            Fonction prête pour intégration.
-        </p>
-
-        <button onclick="buyCrypto()">
-            Acheter
+        <button class="nav-btn">
+            📈
+            <span>Marché</span>
         </button>
 
-        <button onclick="closeModal('buyModal')">
-            Fermer
+        <button class="nav-btn">
+            🔄
+            <span>Swap</span>
         </button>
 
-    </div>
-
-</div>
-
-
-<div id="sellModal" class="modal">
-
-    <div class="modal-content">
-
-        <h2>Vendre Crypto</h2>
-
-        <p>
-            Fonction prête pour intégration.
-        </p>
-
-        <button onclick="sellCrypto()">
-            Vendre
+        <button class="nav-btn">
+            🕒
+            <span>Historique</span>
         </button>
 
-        <button onclick="closeModal('sellModal')">
-            Fermer
+        <button class="nav-btn">
+            ⚙️
+            <span>Paramètres</span>
         </button>
 
-    </div>
+    </nav>
 
 </div>
 
