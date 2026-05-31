@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 
 <meta charset="UTF-8">
@@ -11,13 +10,15 @@
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="wallet.css">
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@6/dist/ethers.umd.min.js"></script>
-
 </head>
 
 <body>
 
 <div class="app">
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
 
 <header class="top-header">
 
@@ -45,7 +46,14 @@ Portefeuille Principal
 
 </header>
 
-<section id="homePage" class="page active">
+
+<!-- ========================= -->
+<!-- PAGE ACCUEIL -->
+<!-- ========================= -->
+
+<section
+id="homePage"
+class="page active">
 
 <div class="balance-card">
 
@@ -54,7 +62,7 @@ Valeur Totale
 </p>
 
 <h1 id="balance">
-$0.00
+$24,580.00
 </h1>
 
 <div class="market-indicator">
@@ -67,34 +75,12 @@ Chargement...
 
 </div>
 
-<div class="wallet-connect-card">
-
-<button
-class="connect-btn"
-onclick="connectWallet()">
-
-Connecter MetaMask
-
-</button>
-
-<p id="walletAddress">
-
-Non connecté
-
-</p>
-
-<p id="walletBalance">
-
-0 ETH
-
-</p>
-
-</div>
 
 <div class="quick-actions">
 
 <button
-class="action-item">
+class="action-item"
+onclick="openModal('sendModal')">
 
 📤
 
@@ -104,9 +90,10 @@ Envoyer
 
 </button>
 
+
 <button
 class="action-item"
-onclick="copyAddress()">
+onclick="openModal('receiveModal')">
 
 📥
 
@@ -116,8 +103,10 @@ Recevoir
 
 </button>
 
+
 <button
-class="action-item">
+class="action-item"
+onclick="openModal('buyModal')">
 
 💳
 
@@ -126,6 +115,7 @@ Acheter
 </span>
 
 </button>
+
 
 <button
 class="action-item"
@@ -141,7 +131,19 @@ Swap
 
 </div>
 
-<div id="qrcode"></div>
+
+<div class="tabs">
+
+<button class="tab active">
+Tokens
+</button>
+
+<button class="tab">
+NFTs
+</button>
+
+</div>
+
 
 <div class="token-list">
 
@@ -181,6 +183,7 @@ BTC
 
 </div>
 
+
 <div class="token-card">
 
 <div class="token-left">
@@ -216,6 +219,7 @@ ETH
 </div>
 
 </div>
+
 
 <div class="token-card">
 
@@ -253,6 +257,7 @@ BNB
 
 </div>
 
+
 <div class="token-card">
 
 <div class="token-left">
@@ -264,11 +269,11 @@ BNB
 <div>
 
 <strong>
-USDT
+Tether
 </strong>
 
 <p>
-Tether
+USDT
 </p>
 
 </div>
@@ -293,6 +298,11 @@ Stablecoin
 
 </section>
 
+
+<!-- ========================= -->
+<!-- PAGE MARCHE -->
+<!-- ========================= -->
+
 <section
 id="marketPage"
 class="page">
@@ -304,12 +314,17 @@ Marché Crypto
 <div class="market-box">
 
 <p>
-Prix en temps réel
+Prix crypto en temps réel
 </p>
 
 </div>
 
 </section>
+
+
+<!-- ========================= -->
+<!-- PAGE SWAP -->
+<!-- ========================= -->
 
 <section
 id="swapPage"
@@ -321,21 +336,45 @@ Swap Crypto
 
 <select id="fromCoin">
 
-<option>BTC</option>
-<option>ETH</option>
-<option>BNB</option>
-<option>USDT</option>
+<option>
+BTC
+</option>
+
+<option>
+ETH
+</option>
+
+<option>
+BNB
+</option>
+
+<option>
+USDT
+</option>
 
 </select>
+
 
 <select id="toCoin">
 
-<option>USDT</option>
-<option>BTC</option>
-<option>ETH</option>
-<option>BNB</option>
+<option>
+USDT
+</option>
+
+<option>
+BTC
+</option>
+
+<option>
+ETH
+</option>
+
+<option>
+BNB
+</option>
 
 </select>
+
 
 <input
 type="number"
@@ -343,11 +382,11 @@ id="swapAmount"
 placeholder="Montant"
 onkeyup="calculateSwap()">
 
+
 <p id="swapResult">
-
 Vous recevrez...
-
 </p>
+
 
 <button
 class="swap-btn"
@@ -359,6 +398,11 @@ Effectuer le Swap
 
 </section>
 
+
+<!-- ========================= -->
+<!-- PAGE HISTORIQUE -->
+<!-- ========================= -->
+
 <section
 id="historyPage"
 class="page">
@@ -369,11 +413,18 @@ Historique
 
 <div class="history-box">
 
-Aucune transaction
+<p>
+Aucune transaction.
+</p>
 
 </div>
 
 </section>
+
+
+<!-- ========================= -->
+<!-- PAGE PARAMETRES -->
+<!-- ========================= -->
 
 <section
 id="settingsPage"
@@ -385,16 +436,23 @@ Paramètres
 
 <div class="settings-box">
 
+<p>
 Version 1.0
+</p>
 
 </div>
 
 </section>
 
+
+<!-- ========================= -->
+<!-- NAVIGATION BAS -->
+<!-- ========================= -->
+
 <nav class="bottom-nav">
 
 <button
-class="nav-btn"
+class="nav-btn active"
 onclick="showPage('homePage')">
 
 🏠
@@ -404,6 +462,7 @@ Accueil
 </span>
 
 </button>
+
 
 <button
 class="nav-btn"
@@ -417,6 +476,7 @@ Marché
 
 </button>
 
+
 <button
 class="nav-btn"
 onclick="showPage('swapPage')">
@@ -429,6 +489,7 @@ Swap
 
 </button>
 
+
 <button
 class="nav-btn"
 onclick="showPage('historyPage')">
@@ -440,6 +501,7 @@ Historique
 </span>
 
 </button>
+
 
 <button
 class="nav-btn"
@@ -457,10 +519,7 @@ Paramètres
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 <script src="wallet.js"></script>
 
 </body>
-
 </html>
