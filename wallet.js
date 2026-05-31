@@ -1,235 +1,340 @@
-// Navigation entre les pages
+// ==========================
+// NAVIGATION
+// ==========================
+
 function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
+
+    document
+    .querySelectorAll(".page")
+    .forEach(page => {
+
+        page.classList.remove("active");
+
     });
 
-    document.getElementById(pageId).classList.add('active');
+    document
+    .getElementById(pageId)
+    .classList.add("active");
+
 }
 
-// Connexion MetaMask
+// ==========================
+// VARIABLES MARCHÉ
+// ==========================
+
+let btcPrice = 0;
+let ethPrice = 0;
+let bnbPrice = 0;
+let usdtPrice = 1;
+
+// ==========================
+// PRIX TEMPS RÉEL
+// ==========================
+
+async function updateMarket() {
+
+    try {
+
+        const response =
+        await fetch(
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,tether&vs_currencies=usd&include_24hr_change=true"
+        );
+
+        const data =
+        await response.json();
+
+        btcPrice =
+        data.bitcoin.usd;
+
+        ethPrice =
+        data.ethereum.usd;
+
+        bnbPrice =
+        data.binancecoin.usd;
+
+        usdtPrice =
+        data.tether.usd;
+
+        document.getElementById(
+        "btcPrice").innerHTML =
+        "$" +
+        btcPrice.toLocaleString();
+
+        document.getElementById(
+        "ethPrice").innerHTML =
+        "$" +
+        ethPrice.toLocaleString();
+
+        document.getElementById(
+        "bnbPrice").innerHTML =
+        "$" +
+        bnbPrice.toLocaleString();
+
+        document.getElementById(
+        "usdtPrice").innerHTML =
+        "$" +
+        usdtPrice;
+
+        document.getElementById(
+        "btcChange").innerHTML =
+        data.bitcoin
+        .usd_24h_change
+        .toFixed(2) + "%";
+
+        document.getElementById(
+        "ethChange").innerHTML =
+        data.ethereum
+        .usd_24h_change
+        .toFixed(2) + "%";
+
+        document.getElementById(
+        "bnbChange").innerHTML =
+        data.binancecoin
+        .usd_24h_change
+        .toFixed(2) + "%";
+
+        document.getElementById(
+        "marketStatus"
+        ).innerHTML =
+
+        "BTC $" +
+
+        btcPrice.toLocaleString();
+
+    }
+
+    catch(error) {
+
+        console.log(error);
+
+    }
+
+}
+
+updateMarket();
+
+setInterval(
+updateMarket,
+30000
+);
+
+// ==========================
+// CONNEXION METAMASK
+// ==========================
+
 async function connectWallet() {
 
     if (!window.ethereum) {
-        alert("MetaMask n'est pas installé.");
+
+        alert(
+        "MetaMask n'est pas installé."
+        );
+
         return;
+
     }
 
     try {
 
-        const accounts = await ethereum.request({
-            method: 'eth_requestAccounts'
+        await window.ethereum.request({
+            method: "eth_requestAccounts"
         });
 
-        const address = accounts[0];
-
-        document.getElementById("walletAddress").innerText = address;
-
-        const provider = new ethers.BrowserProvider(window.ethereum);
-
-        const balance = await provider.getBalance(address);
-
-        const ethBalance = ethers.formatEther(balance);
-
-        document.getElementById("walletBalance").innerText =
-            parseFloat(ethBalance).toFixed(4) + " ETH";
-
-    } catch (error) {
-
-        console.error(error);
-
-    }
-}
-
-// Copier adresse
-function copyAddress() {
-
-    const address =
-        document.getElementById("walletAddress").innerText;
-
-    if (
-        address === "Non connecté"
-    ) {
-        alert("Connectez MetaMask d'abord");
-        return;
-    }
-
-    navigator.clipboard.writeText(address);
-
-    alert("Adresse copiée");
-}
-
-// Prix crypto en temps réel
-async function loadPrices() {
-
-    try {
-
-        const response = await fetch(
-            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,tether&vs_currencies=usd&include_24hr_change=true"
+        const provider =
+        new ethers.BrowserProvider(
+        window.ethereum
         );
 
-        const data = await response.json();
+        const signer =
+        await provider.getSigner();
 
-        document.getElementById("btcPrice").innerText =
-            "$" + data.bitcoin.usd;
+        const address =
+        await signer.getAddress();
 
-        document.getElementById("ethPrice").innerText =
-            "$" + data.ethereum.usd;
-
-        document.getElementById("bnbPrice").innerText =
-            "$" + data.binancecoin.usd;
-
-        document.getElementById("usdtPrice").innerText =
-            "$" + data.tether.usd;
-
-        setChange(
-            "btcChange",
-            data.bitcoin.usd_24h_change
+        const balance =
+        await provider.getBalance(
+        address
         );
 
-        setChange(
-            "ethChange",
-            data.ethereum.usd_24h_change
-        );
+        document.getElementById(
+        "walletAddress"
+        ).innerHTML =
+        address;
 
-        setChange(
-            "bnbChange",
-            data.binancecoin.usd_24h_change
-        );
+        document.getElementById(
+        "walletBalance"
+        ).innerHTML =
 
-        const marketAverage =
-            (
-                data.bitcoin.usd_24h_change +
-                data.ethereum.usd_24h_change +
-                data.binancecoin.usd_24h_change
-            ) / 3;
+        parseFloat(
+        ethers.formatEther(balance)
+        ).toFixed(4)
 
-        const marketStatus =
-            document.getElementById("marketStatus");
-
-        if (marketAverage >= 0) {
-
-            marketStatus.innerHTML =
-                "📈 Marché haussier +" +
-                marketAverage.toFixed(2) +
-                "%";
-
-        } else {
-
-            marketStatus.innerHTML =
-                "📉 Marché baissier " +
-                marketAverage.toFixed(2) +
-                "%";
-
-        }
-
-    } catch (error) {
-
-        console.error(error);
+        + " ETH";
 
     }
-}
 
-// Couleurs variation
-function setChange(elementId, value) {
+    catch(error) {
 
-    const element =
-        document.getElementById(elementId);
-
-    const percent =
-        parseFloat(value).toFixed(2);
-
-    if (value >= 0) {
-
-        element.innerHTML =
-            "+" + percent + "%";
-
-        element.className =
-            "positive";
-
-    } else {
-
-        element.innerHTML =
-            percent + "%";
-
-        element.className =
-            "negative";
+        console.log(error);
 
     }
+
 }
 
-// QR Code
-function generateQRCode() {
+// ==========================
+// SWAP
+// ==========================
 
-    const qrContainer =
-        document.getElementById("qrcode");
-
-    qrContainer.innerHTML = "";
-
-    new QRCode(qrContainer, {
-        text:
-            document.getElementById("walletAddress").innerText ||
-            "SOCO-WALLET",
-        width: 150,
-        height: 150
-    });
-}
-
-// Calcul swap démo
 function calculateSwap() {
 
     const amount =
-        parseFloat(
-            document.getElementById("swapAmount").value
-        ) || 0;
+    parseFloat(
+    document.getElementById(
+    "swapAmount"
+    ).value
+    );
 
-    document.getElementById("swapResult").innerText =
-        "Vous recevrez " +
-        amount.toFixed(4);
-}
+    const fromCoin =
+    document.getElementById(
+    "fromCoin"
+    ).value;
 
-// Swap démo
-function swapCrypto() {
+    const toCoin =
+    document.getElementById(
+    "toCoin"
+    ).value;
 
-    const amount =
-        document.getElementById("swapAmount").value;
+    if (isNaN(amount)) {
 
-    if (!amount || amount <= 0) {
-
-        alert("Entrez un montant valide");
+        document.getElementById(
+        "swapResult"
+        ).innerHTML =
+        "Vous recevrez...";
 
         return;
 
     }
 
-    alert(
-        "Swap simulé avec succès"
-    );
+    let usdValue = 0;
+
+    if (fromCoin === "BTC") {
+
+        usdValue =
+        amount * btcPrice;
+
+    }
+
+    if (fromCoin === "ETH") {
+
+        usdValue =
+        amount * ethPrice;
+
+    }
+
+    if (fromCoin === "BNB") {
+
+        usdValue =
+        amount * bnbPrice;
+
+    }
+
+    if (fromCoin === "USDT") {
+
+        usdValue =
+        amount;
+
+    }
+
+    let result = 0;
+
+    if (toCoin === "BTC") {
+
+        result =
+        usdValue / btcPrice;
+
+    }
+
+    if (toCoin === "ETH") {
+
+        result =
+        usdValue / ethPrice;
+
+    }
+
+    if (toCoin === "BNB") {
+
+        result =
+        usdValue / bnbPrice;
+
+    }
+
+    if (toCoin === "USDT") {
+
+        result =
+        usdValue;
+
+    }
+
+    document.getElementById(
+    "swapResult"
+    ).innerHTML =
+
+    "Vous recevrez environ "
+
+    +
+
+    result.toFixed(6)
+
+    +
+
+    " "
+
+    +
+
+    toCoin;
+
 }
 
-// Enregistrement service worker
+function swapCrypto() {
+
+    calculateSwap();
+
+    alert(
+    "Simulation de swap effectuée."
+    );
+
+}
+
+// ==========================
+// PWA
+// ==========================
+
 if ("serviceWorker" in navigator) {
 
-    window.addEventListener("load", () => {
+    window.addEventListener(
+    "load",
 
-        navigator.serviceWorker.register(
-            "service-worker.js"
-        );
+    () => {
+
+        navigator.serviceWorker
+        .register(
+        "./service-worker.js"
+        )
+
+        .then(() => {
+
+            console.log(
+            "Service Worker installé"
+            );
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+        });
 
     });
 
 }
-
-// Initialisation
-window.onload = () => {
-
-    loadPrices();
-
-    setInterval(
-        loadPrices,
-        30000
-    );
-
-    generateQRCode();
-
-};
